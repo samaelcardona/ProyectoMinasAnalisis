@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
 public class Tunel {
     
     private int idTunel;
-    private double x1Tunel;
+    private double x1Tunel;// para que x1,x2,y1,????????????
     private double y1Tunel;
     private double x2Tunel;
     private double y2Tunel;
