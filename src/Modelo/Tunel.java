@@ -43,7 +43,20 @@ public class Tunel {
         this.listadeNodosEnElTunel = new LinkedList<>();
     }
 
-    
+    public Tunel(){
+        this.idTunel = 0;
+        this.x1Tunel = 0;
+        this.y1Tunel = 0;
+        this.x2Tunel = 0;
+        this.y2Tunel = 0;
+        this.anchoTunel = 0;
+        this.altoTunel = 0;
+        this.imagenTunel = null;
+        this.depositoEnElTunel = null;
+        this.esEntradaOSalida = false;
+        this.tieneDeposito = false;
+        this.listadeNodosEnElTunel = new LinkedList<>();
+    }
 
     
     

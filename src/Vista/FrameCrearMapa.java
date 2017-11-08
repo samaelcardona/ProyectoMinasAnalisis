@@ -211,12 +211,14 @@ public class FrameCrearMapa extends javax.swing.JFrame {
        panelCrearMapa2.getImagenEnMovimientoPanel().setImagen(new ImageIcon("src\\imagenes\\0.png"));
         this.jRadioButton2.setSelected(false);
         this.jRadioButton3.setSelected(false);
+        this.panelCrearMapa2.setFrame(this);
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
        panelCrearMapa2.getImagenEnMovimientoPanel().setImagen(new ImageIcon("src\\imagenes\\2.png"));
         this.jRadioButton2.setSelected(false);
         this.jRadioButton1.setSelected(false);
+        this.panelCrearMapa2.setFrame(this);
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
@@ -224,6 +226,7 @@ public class FrameCrearMapa extends javax.swing.JFrame {
         panelCrearMapa2.getImagenEnMovimientoPanel().setImagen(new ImageIcon("src\\imagenes\\1.png"));
         this.jRadioButton1.setSelected(false);
         this.jRadioButton3.setSelected(false);
+        this.panelCrearMapa2.setFrame(this);
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     /**

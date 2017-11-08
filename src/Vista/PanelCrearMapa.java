@@ -38,6 +38,7 @@ public class PanelCrearMapa extends javax.swing.JPanel implements MouseMotionLis
         addMouseListener(this);
         addMouseMotionListener(this);
         imagenEnMovimientoPanel=new ImagenARotar(0, 0, null);
+        controladorParaCrearMina=new ControladorParaCrearMina();
         
 
     }
@@ -65,7 +66,7 @@ public class PanelCrearMapa extends javax.swing.JPanel implements MouseMotionLis
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
          ImageIcon imagenIcon=new ImageIcon(getClass().getResource("/Imagenes/fondoParaPanelMina.jpg"));
-        g.drawImage(imagenIcon.getImage(),0, 0,getSize().width,getSize().height ,this);
+         g.drawImage(imagenIcon.getImage(),0, 0,getSize().width,getSize().height ,this);
         
         
         for (int i = 0; i <= x; i++) {
@@ -84,47 +85,19 @@ public class PanelCrearMapa extends javax.swing.JPanel implements MouseMotionLis
         if (imagenEnMovimientoPanel.getImagen() != null) {
               g.drawImage(imagenEnMovimientoPanel.getImagen().getImage(),imagenEnMovimientoPanel.getPosicionx(), imagenEnMovimientoPanel.getPosiciony(),imagenEnMovimientoPanel.getImagen().getIconWidth(),imagenEnMovimientoPanel.getImagen().getIconHeight(),this);
         }
+        
+        for (int i = 0; i < x; i++) {
+            for (int j = 0; j < y; j++) {
+                if (controladorParaCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getImagenTunel()!=null) {
+                    g.drawImage(controladorParaCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getImagenTunel().getImage(),(int)controladorParaCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getX1Tunel(),(int)controladorParaCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getY1Tunel(),controladorParaCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getImagenTunel().getIconWidth(),controladorParaCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getImagenTunel().getIconHeight(),this);
+                }
+            }
+        }
        
         
 
         repaint();
-    }
-    
-    
-//    public int[] retornarPosicionCuadriculaSeleccionada(int x, int y) {
-//
-//        boolean encontroX = false;
-//        boolean encontroY = false;
-//        int i = 0;
-//        int j = 0;
-//        int[] datosXY = new int[2];
-//
-//        //para encontrar limites en x 
-//        while (i < 20 && encontroX == false) {
-//            if (matrizPuntosLimitesCuadriculaMapa[i][j].getX1() <= x && matrizPuntosLimitesCuadriculaMapa[i][j].getX2() >= x) {
-//                encontroX = true;
-//                datosXY[0] = i;
-//            }
-//            i++;
-//        }
-//
-//        //para encontrar limites en y despues de haber encontrado x
-//        if (encontroX == true) {
-//            while (j < 10 && encontroY == false) {
-//                if (matrizPuntosLimitesCuadriculaMapa[datosXY[0]][j].getY1() <= y && matrizPuntosLimitesCuadriculaMapa[datosXY[0]][j].getY2() >= y) {
-//                    encontroY = true;
-//                    datosXY[1] = j;
-//                }
-//                j++;
-//            }
-//        } else {
-//            System.out.println("verifique posiciones seleccionadas");
-//        }
-//        if (encontroY == true) {
-//            return datosXY;
-//        }
-//        return null;
-//    }
+    } 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
@@ -150,7 +123,17 @@ public class PanelCrearMapa extends javax.swing.JPanel implements MouseMotionLis
         int y = (int) e.getPoint().getY();
        
         ///aca llamo el meotodo para crear tunel en la clase controladorparacrearmina
+        if (frame.getjRadioButton1().isSelected()) {
+            controladorParaCrearMina.agregarElementoTunelEntrada(x, y);
+        }
+        if (frame.getjRadioButton2().isSelected()) {
+            controladorParaCrearMina.agregarElementoTunelDeposito(x, y);
+        }
+        if (frame.getjRadioButton3().isSelected()) {
+            controladorParaCrearMina.agregarElementoTunelSencillo(x, y);
+        }
         
+        repaint();
     }
 
     @Override

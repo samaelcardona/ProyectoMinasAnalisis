@@ -34,7 +34,7 @@ public class MinaGrafo {
         this.listaTunelesMina = new LinkedList<>();
         this.listaDeAristasGrafoMina = new LinkedList<>();
         this.listaDeNodosGrafoMina = new LinkedList<>();
-        this.matrizTuneles = matrizTuneles;
+        this.matrizTuneles = new Tunel[20][10];
         this.costoMina=0;
     }
 
