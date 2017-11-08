@@ -5,8 +5,8 @@
  */
 package Vista;
 
-
-import Controlador.controladorParaCrearMina;
+import Controlador.ControladorParaCrearMina;
+import Modelo.ImagenARotar;
 import Modelo.Tunel;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -16,8 +16,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import javax.swing.ImageIcon;
-import Controlador.*;
-import java.awt.Image;
 
 /**
  *
@@ -25,12 +23,11 @@ import java.awt.Image;
  */
 public class PanelCrearMapa extends javax.swing.JPanel implements MouseMotionListener, MouseListener, KeyListener {
 
-    //Image tunel
+    ImagenARotar imagenEnMovimientoPanel;
     int x = 20;
     int y = 10;
-    private controladorParaCrearMina controladorParaCrearMina;
+    private ControladorParaCrearMina controladorParaCrearMina;
     private FrameCrearMapa frame;
-    
 
     public PanelCrearMapa() {
         initComponents();
@@ -40,7 +37,9 @@ public class PanelCrearMapa extends javax.swing.JPanel implements MouseMotionLis
         setFocusTraversalKeysEnabled(false);
         addMouseListener(this);
         addMouseMotionListener(this);
+        imagenEnMovimientoPanel=new ImagenARotar(0, 0, null);
         
+
     }
 
     @SuppressWarnings("unchecked")
@@ -65,9 +64,7 @@ public class PanelCrearMapa extends javax.swing.JPanel implements MouseMotionLis
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
-        ///aca se grafica las lineas horizontales para la cuadricula
-        
-        ImageIcon imagenIcon=new ImageIcon(getClass().getResource("/Imagenes/fondoParaPanelMina.jpg"));
+         ImageIcon imagenIcon=new ImageIcon(getClass().getResource("/Imagenes/fondoParaPanelMina.jpg"));
         g.drawImage(imagenIcon.getImage(),0, 0,getSize().width,getSize().height ,this);
         
         
@@ -84,12 +81,14 @@ public class PanelCrearMapa extends javax.swing.JPanel implements MouseMotionLis
 
         //llenar matriz 
         
-        
+        if (imagenEnMovimientoPanel.getImagen() != null) {
+              g.drawImage(imagenEnMovimientoPanel.getImagen().getImage(),imagenEnMovimientoPanel.getPosicionx(), imagenEnMovimientoPanel.getPosiciony(),imagenEnMovimientoPanel.getImagen().getIconWidth(),imagenEnMovimientoPanel.getImagen().getIconHeight(),this);
+        }
+       
         
 
         repaint();
     }
-
     
     
 //    public int[] retornarPosicionCuadriculaSeleccionada(int x, int y) {
@@ -126,7 +125,7 @@ public class PanelCrearMapa extends javax.swing.JPanel implements MouseMotionLis
 //        }
 //        return null;
 //    }
-//    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 
@@ -138,21 +137,19 @@ public class PanelCrearMapa extends javax.swing.JPanel implements MouseMotionLis
     @Override
     public void mouseMoved(MouseEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        //if (tunel != null) {
-          //  tunel.setX1Tunel(e.getX() - 23);
-           // tunel.setY1Tunel(e.getY() - 23);
+        if (imagenEnMovimientoPanel.getImagen() != null) {
+            imagenEnMovimientoPanel.setPosicionx(e.getX() - 23);
+            imagenEnMovimientoPanel.setPosiciony(e.getY() - 23);
             repaint();
-        //}
+        }
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {             
         int x = (int) e.getPoint().getX();
         int y = (int) e.getPoint().getY();
-        System.out.println("X: "+x+" Y: "+y);
-//        int posicion [] = retornarPosicionCuadriculaSeleccionada(x, y);
-      //  System.out.println("X: "+posicion[0]+" Y: "+posicion[1]);  
-        
+       
+        ///aca llamo el meotodo para crear tunel en la clase controladorparacrearmina
         
     }
 
@@ -200,8 +197,11 @@ public class PanelCrearMapa extends javax.swing.JPanel implements MouseMotionLis
         this.frame = frame;
     }
 
-
+    public ImagenARotar getImagenEnMovimientoPanel() {
+        return imagenEnMovimientoPanel;
+    }
 
         
+    
     
 }

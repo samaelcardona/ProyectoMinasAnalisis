@@ -24,14 +24,13 @@ public class PanelInicial extends javax.swing.JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
-        
+    
         ImageIcon imagenIcon=new ImageIcon(getClass().getResource("/Imagenes/fondoPaginaInicial.jpg"));
         g.drawImage(imagenIcon.getImage(),0, 0,getSize().width,getSize().height ,this);
-        
     }
-    
-    
 
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

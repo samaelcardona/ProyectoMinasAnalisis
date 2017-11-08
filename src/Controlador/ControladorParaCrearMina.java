@@ -9,6 +9,6 @@ package Controlador;
  *
  * @author SAMAEL
  */
-public class ControladorInicial {
+public class ControladorParaCrearMina {
     
 }
