@@ -5,34 +5,62 @@
  */
 package Modelo;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author SAMAEL
  */
 public class Minero {
     
-    private int idMinero;
-    private String EspecialidadDelMinero; ///plata, oro, bronce, comodin
-    private double gananciaMinero;
-    private int velocidadMinero;
-    private boolean estadoMineroActivo;
-    private int cantidadDeMineralExtraido;
-    private int xMinero;
-    private int yMinero;
-    private int anchoMinero;
-    private int altoMinero;
+    private int idMinero;//identificacion del minero
+    private String especialidadDelMinero; ///plata, oro, bronce, comodin
+    private double gananciaMinero;//esto se va sumando dependiendo del tiempo laborado y el mineral
+    private int velocidadMinero;//tiempo en que tarda en extraer mineral, igual numero para todos
+    private boolean estadoMineroActivo;//si esta enfermo o incapacitado sera activo o no
+    private int cantidadDeMineralExtraido;//dependiendo de lo laborado
+    private int xMinero;//posicion x
+    private int yMinero;//posicion y
+    private int anchoMinero;// ancho minero
+    private int altoMinero;// alto minero
+    private ImageIcon imagen;//imagen del minero
+    private boolean mover;//Si se puede mover o no
+    
 
-    public Minero(int idMinero, String EspecialidadDelMinero, boolean estadoMineroActivo, int xMinero, int yMinero, int anchoMinero, int altoMinero) {
+    public Minero(int idMinero, String especialidadDelMinero, int xMinero, int yMinero, int anchoMinero, int altoMinero,String rutaImagen) {
         this.idMinero = idMinero;
-        this.EspecialidadDelMinero = EspecialidadDelMinero;
-        this.estadoMineroActivo = estadoMineroActivo;
+        this.especialidadDelMinero = especialidadDelMinero;
         this.xMinero = xMinero;
         this.yMinero = yMinero;
         this.anchoMinero = anchoMinero;
         this.altoMinero = altoMinero;
+        this.imagen=new ImageIcon(getClass().getResource(rutaImagen));
+        //colocar las variables estaticas
+        this.mover=true;
+        this.estadoMineroActivo=true;
+        this.gananciaMinero=0;
+        this.velocidadMinero=10;
+        this.cantidadDeMineralExtraido=0;
+        
     }
 
     
+    
+    public ImageIcon getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(ImageIcon imagen) {
+        this.imagen = imagen;
+    }
+
+    public boolean isMover() {
+        return mover;
+    }
+
+    public void setMover(boolean mover) {
+        this.mover = mover;
+    }
 
     public int getIdMinero() {
         return idMinero;
@@ -43,11 +71,11 @@ public class Minero {
     }
 
     public String getEspecialidadDelMinero() {
-        return EspecialidadDelMinero;
+        return especialidadDelMinero;
     }
 
-    public void setEspecialidadDelMinero(String EspecialidadDelMinero) {
-        this.EspecialidadDelMinero = EspecialidadDelMinero;
+    public void setEspecialidadDelMinero(String especialidadDelMinero) {
+        this.especialidadDelMinero = especialidadDelMinero;
     }
 
     public double getGananciaMinero() {
