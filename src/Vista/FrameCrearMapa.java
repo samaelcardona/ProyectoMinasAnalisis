@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Controlador.ControladorParaCrearMina;
 import Modelo.ImagenARotar;
 import Modelo.Tunel;
 import java.awt.Image;
@@ -23,6 +24,8 @@ public class FrameCrearMapa extends javax.swing.JFrame {
     FrameAdministrarEmpresa frameAdminEmpresa;
     LinkedList<JRadioButton> botones;
     ImageIcon[] listaImagenesParaSeleccionar;
+    ControladorParaCrearMina controladorCrearMina;
+    int contadorIdDeposito;
     
     public FrameCrearMapa() {
          setUndecorated(true);
@@ -44,6 +47,10 @@ public class FrameCrearMapa extends javax.swing.JFrame {
             listaImagenesParaSeleccionar[i] = imagen;
         }
     
+        contadorIdDeposito=1;
+        
+        this.controladorCrearMina=new ControladorParaCrearMina();
+        this.panelCrearMapa2.recibirPadreFrameCrearMapa(this);
     }
 
     /**
@@ -127,19 +134,34 @@ public class FrameCrearMapa extends javax.swing.JFrame {
 
         jComboBox1.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ORO", "PLATA", "BRONCE" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel3.setText("CANTIDAD MINEROS MAX :");
 
         jTextField2.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jLabel4.setText("CANTIDAD MINERAL MAX");
+        jLabel4.setText("CANTIDAD MINERAL");
 
         jLabel5.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel5.setText("POR DEPOSITO:");
 
         jTextField3.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel6.setText("VALOR MINA:");
@@ -374,14 +396,14 @@ public class FrameCrearMapa extends javax.swing.JFrame {
        panelCrearMapa2.getImagenEnMovimientoPanel().setImagen(new ImageIcon("src\\imagenes\\0.png"));
         this.jRadioButton2.setSelected(false);
         this.jRadioButton3.setSelected(false);
-        this.panelCrearMapa2.setFrame(this);
+        this.panelCrearMapa2.setFrameCrearMapa(this);
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
        panelCrearMapa2.getImagenEnMovimientoPanel().setImagen(new ImageIcon("src\\imagenes\\2.png"));
         this.jRadioButton2.setSelected(false);
         this.jRadioButton1.setSelected(false);
-        this.panelCrearMapa2.setFrame(this);
+        this.panelCrearMapa2.setFrameCrearMapa(this);
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
@@ -389,7 +411,7 @@ public class FrameCrearMapa extends javax.swing.JFrame {
         panelCrearMapa2.getImagenEnMovimientoPanel().setImagen(new ImageIcon("src\\imagenes\\1.png"));
         this.jRadioButton1.setSelected(false);
         this.jRadioButton3.setSelected(false);
-        this.panelCrearMapa2.setFrame(this);
+        this.panelCrearMapa2.setFrameCrearMapa(this);
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -402,7 +424,8 @@ public class FrameCrearMapa extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        this.controladorCrearMina.recibirDatosInicialesMina(this.frameAdminEmpresa.contadorDeMinasID, this.jComboBox1.getSelectedItem()+"",this.contadorIdDeposito,Integer.parseInt(this.jTextField2.getText()),Integer.parseInt(this.jTextField3.getText()),Integer.parseInt(this.jTextField4.getText()));
+        frameAdminEmpresa.minerals.getListaDeMinas().add(this.controladorCrearMina.getMinaNueva());
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jPanel6MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseMoved
@@ -416,6 +439,18 @@ public class FrameCrearMapa extends javax.swing.JFrame {
     private void jPanel7MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseMoved
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel7MouseMoved
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
 
     /**
      * @param args the command line arguments

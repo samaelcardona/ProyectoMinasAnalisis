@@ -17,6 +17,7 @@ public class FrameAdministrarEmpresa extends javax.swing.JFrame {
    
     CompaniaMinera minerals;//creo la compania minera
     int contadorDeMinerosID;//variable para darle el id a cada minero.
+    int contadorDeMinasID;//variable para darle el id a cada mina.
     
     /**
      * Creates new form FrameAdministrarEmpresa
@@ -330,6 +331,7 @@ public class FrameAdministrarEmpresa extends javax.swing.JFrame {
     public void sinArchivoJson(){
         this.minerals=new CompaniaMinera(1, "Minerals");
         this.contadorDeMinerosID=1;
+        this.contadorDeMinasID=1;
     }
     
     public void conArchivoJson(CompaniaMinera minerals){

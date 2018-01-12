@@ -27,7 +27,7 @@ public class PanelCrearMapa extends javax.swing.JPanel implements MouseMotionLis
     int x = 20;
     int y = 10;
     private ControladorParaCrearMina controladorParaCrearMina;
-    private FrameCrearMapa frame;
+    private FrameCrearMapa frameCrearMapa;
 
     public PanelCrearMapa() {
         initComponents();
@@ -38,7 +38,6 @@ public class PanelCrearMapa extends javax.swing.JPanel implements MouseMotionLis
         addMouseListener(this);
         addMouseMotionListener(this);
         imagenEnMovimientoPanel=new ImagenARotar(0, 0, null);
-        controladorParaCrearMina=new ControladorParaCrearMina();
         
 
     }
@@ -88,8 +87,8 @@ public class PanelCrearMapa extends javax.swing.JPanel implements MouseMotionLis
         
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
-                if (controladorParaCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getImagenTunel()!=null) {
-                    g.drawImage(controladorParaCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getImagenTunel().getImage(),(int)controladorParaCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getX1Tunel(),(int)controladorParaCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getY1Tunel(),controladorParaCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getImagenTunel().getIconWidth(),controladorParaCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getImagenTunel().getIconHeight(),this);
+                if (this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getImagenTunel()!=null) {
+                    g.drawImage(this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getImagenTunel().getImage(),(int)this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getX1Tunel(),(int)this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getY1Tunel(),this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getImagenTunel().getIconWidth(),this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getImagenTunel().getIconHeight(),this);
                 }
             }
         }
@@ -102,6 +101,12 @@ public class PanelCrearMapa extends javax.swing.JPanel implements MouseMotionLis
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 
+    
+    public void recibirPadreFrameCrearMapa(FrameCrearMapa frameCrearMapa){
+        this.frameCrearMapa=frameCrearMapa;
+    }
+    
+    
     @Override
     public void mouseDragged(MouseEvent me) {
      //   throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -123,14 +128,15 @@ public class PanelCrearMapa extends javax.swing.JPanel implements MouseMotionLis
         int y = (int) e.getPoint().getY();
        
         ///aca llamo el meotodo para crear tunel en la clase controladorparacrearmina
-        if (frame.getjRadioButton1().isSelected()) {
-            controladorParaCrearMina.agregarElementoTunelEntrada(x, y);
+        if (frameCrearMapa.getjRadioButton1().isSelected()) {
+            frameCrearMapa.controladorCrearMina.agregarElementoTunelEntrada(x, y);
         }
-        if (frame.getjRadioButton2().isSelected()) {
-            controladorParaCrearMina.agregarElementoTunelDeposito(x, y);
+        if (frameCrearMapa.getjRadioButton2().isSelected()) {
+           frameCrearMapa.controladorCrearMina.agregarElementoTunelDeposito(x, y);
+           frameCrearMapa.contadorIdDeposito++;
         }
-        if (frame.getjRadioButton3().isSelected()) {
-            controladorParaCrearMina.agregarElementoTunelSencillo(x, y);
+        if (frameCrearMapa.getjRadioButton3().isSelected()) {
+            frameCrearMapa.controladorCrearMina.agregarElementoTunelSencillo(x, y);
         }
         
         repaint();
@@ -172,12 +178,12 @@ public class PanelCrearMapa extends javax.swing.JPanel implements MouseMotionLis
       //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public FrameCrearMapa getFrame() {
-        return frame;
+    public FrameCrearMapa getFrameCrearMapa() {
+        return frameCrearMapa;
     }
 
-    public void setFrame(FrameCrearMapa frame) {
-        this.frame = frame;
+    public void setFrameCrearMapa(FrameCrearMapa frameCrearMapa) {
+        this.frameCrearMapa = frameCrearMapa;
     }
 
     public ImagenARotar getImagenEnMovimientoPanel() {

@@ -15,6 +15,8 @@ public class MinaGrafo {
     
     private int idMina;
     private String mineralEnLaMina;
+    private int cantidadDeMinerosMax;
+    private int cantidadDeMineralPorDeposito;
     private LinkedList<Minero> listaDeMinerosEspecializadosEnMina;
     private LinkedList<Minero> listaDeMinerosComodinsEnMina;
     private LinkedList<Tunel> listaTunelesMina;
@@ -26,6 +28,8 @@ public class MinaGrafo {
     public MinaGrafo(int idMina, String mineralEnLaMina, Tunel[][] matrizTuneles) {
         this.idMina = idMina;
         this.mineralEnLaMina = mineralEnLaMina;
+        this.cantidadDeMinerosMax=0;
+        this.cantidadDeMineralPorDeposito=0;
         this.matrizTuneles = matrizTuneles;
         this.idMina = idMina;
         this.mineralEnLaMina = mineralEnLaMina;
@@ -38,7 +42,21 @@ public class MinaGrafo {
         this.costoMina=0;
     }
 
+    public int getCantidadDeMineralPorDeposito() {
+        return cantidadDeMineralPorDeposito;
+    }
+
+    public void setCantidadDeMineralPorDeposito(int cantidadDeMineralPorDeposito) {
+        this.cantidadDeMineralPorDeposito = cantidadDeMineralPorDeposito;
+    }
     
+    public int getCantidadDeMinerosMax() {
+        return cantidadDeMinerosMax;
+    }
+
+    public void setCantidadDeMinerosMax(int cantidadDeMinerosMax) {
+        this.cantidadDeMinerosMax = cantidadDeMinerosMax;
+    }
     
     public double getCostoMina() {
         return costoMina;

@@ -10,6 +10,9 @@ import javax.swing.ImageIcon;
 /**
  *
  * @author SAMAEL
+ * 
+ * Imagen para crear la animacion cuando estoy creando la mina  poderlo mover
+ * 
  */
 public class ImagenARotar {
     

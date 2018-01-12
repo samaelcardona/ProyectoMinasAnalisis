@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
 public class Tunel {
     
     private int idTunel;
-    private double x1Tunel;// para que x1,x2,y1,????????????
+    private double x1Tunel;// para que x1,x2,y1,????????????  -->> son los limites que van a tener  posiciones necesarias para tener el area del la cuadricula del tunel
     private double y1Tunel;
     private double x2Tunel;
     private double y2Tunel;
