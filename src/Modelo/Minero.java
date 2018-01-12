@@ -45,7 +45,7 @@ public class Minero {
     }
 
     
-    
+   
     public ImageIcon getImagen() {
         return imagen;
     }

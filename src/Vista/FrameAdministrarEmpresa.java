@@ -5,12 +5,19 @@
  */
 package Vista;
 
+import Modelo.CompaniaMinera;
+
 /**
  *
  * @author SAMAEL
  */
 public class FrameAdministrarEmpresa extends javax.swing.JFrame {
 
+    
+   
+    CompaniaMinera minerals;//creo la compania minera
+    int contadorDeMinerosID;//variable para darle el id a cada minero.
+    
     /**
      * Creates new form FrameAdministrarEmpresa
      */
@@ -18,6 +25,9 @@ public class FrameAdministrarEmpresa extends javax.swing.JFrame {
         setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
+        
+       
+        
     }
 
     /**
@@ -317,22 +327,37 @@ public class FrameAdministrarEmpresa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void sinArchivoJson(){
+        this.minerals=new CompaniaMinera(1, "Minerals");
+        this.contadorDeMinerosID=1;
+    }
+    
+    public void conArchivoJson(CompaniaMinera minerals){
+        this.minerals=minerals;
+    }
+    
+    
+    
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         FrameContratarPersonal contratar=new FrameContratarPersonal();
+        contratar.recibirFramePadre(this);
         contratar.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jPanel4MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseMoved
-        
+       
     }//GEN-LAST:event_jPanel4MouseMoved
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        FrameAdministrarMinas administrarMinas=new FrameAdministrarMinas();
+        administrarMinas.recibirFramePadre(this);
+        administrarMinas.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jPanel6MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseMoved
@@ -347,6 +372,9 @@ public class FrameAdministrarEmpresa extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         FrameMostrarPersonal mostrarPersonal=new FrameMostrarPersonal();
+        mostrarPersonal.recibirFramePadre(this);
+        mostrarPersonal.recibirFrameListaDeMineros(this.minerals.getListaDeMineros());
+        mostrarPersonal.llenarListaDeJComboBox();
         mostrarPersonal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton8ActionPerformed
@@ -357,6 +385,7 @@ public class FrameAdministrarEmpresa extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         FrameCrearMapa crearmina=new FrameCrearMapa();
+        crearmina.recibirFramePadre(this);
         crearmina.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton10ActionPerformed

@@ -21,7 +21,6 @@ public class FrameInicial extends javax.swing.JFrame {
     public FrameInicial() {
         setUndecorated(true);
         initComponents();
-        
         this.setLocationRelativeTo(null);
     }
 
@@ -29,15 +28,7 @@ public class FrameInicial extends javax.swing.JFrame {
     public void paintComponents(Graphics g) {
         super.paintComponents(g); //To change body of generated methods, choose Tools | Templates.
         
-        
     }
-
-    
-
-    
-    
-
-    
     
     
     /**
@@ -231,6 +222,7 @@ public class FrameInicial extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         FrameAdministrarEmpresa adminEmpresa=new FrameAdministrarEmpresa();
+        adminEmpresa.sinArchivoJson();
         adminEmpresa.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed

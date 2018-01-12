@@ -5,19 +5,29 @@
  */
 package Vista;
 
+import Controlador.ControladorParaContratarPersonal;
+import Modelo.Minero;
+import java.awt.Frame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author SAMAEL
  */
 public class FrameContratarPersonal extends javax.swing.JFrame {
 
+    FrameAdministrarEmpresa frameAdminEmpresa;
+    String rutaImagen;
+    ControladorParaContratarPersonal controladorContrato;
+
     /**
      * Creates new form FrameContratarPersonal
      */
     public FrameContratarPersonal() {
-       setUndecorated(true);
+        setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
+        this.rutaImagen = "";
     }
 
     /**
@@ -103,6 +113,11 @@ public class FrameContratarPersonal extends javax.swing.JFrame {
 
         jComboBox1.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ORO", "PLATA", "BRONCE", "COMODIN" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel3.setText("Especialidad:");
@@ -164,8 +179,6 @@ public class FrameContratarPersonal extends javax.swing.JFrame {
                 .addGap(64, 64, 64))
         );
 
-        jLabel8.getAccessibleContext().setAccessibleName("<html><p>Contratar</p><p ALIGN=center>Persona</p></html>");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -194,7 +207,7 @@ public class FrameContratarPersonal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRadioButton1)
                             .addComponent(jRadioButton2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -208,20 +221,62 @@ public class FrameContratarPersonal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void recibirFramePadre(FrameAdministrarEmpresa frameAdminEmpresa) {
+        this.frameAdminEmpresa = frameAdminEmpresa;
+    }
+
+
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        FrameAdministrarEmpresa adminEmpresa=new FrameAdministrarEmpresa();
-        adminEmpresa.setVisible(true);
+        this.frameAdminEmpresa.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         //hacer validaciones con los porcentajes .. y demas valores agregar xy ancho y alto imagen segun seleccion.
+        this.controladorContrato = new ControladorParaContratarPersonal(this.frameAdminEmpresa.minerals.getListaDeMineros());
         
-        
+        //verifico que este seleccionando alguna imagen
+        if (jRadioButton1.isSelected() || jRadioButton2.isSelected()) {
+            //verifico que tipo de minero es 
+            if (jComboBox1.getSelectedItem() == "COMODIN") {
+                ///verifico el porcentaje de mineros comodin
+                if (this.controladorContrato.verificarMinerosComodin() == true) {
+                    Minero mineroNuevo = new Minero(this.frameAdminEmpresa.contadorDeMinerosID, "COMODIN", 0, 0, 25, 25, rutaImagen);
+                    this.frameAdminEmpresa.contadorDeMinerosID++;
+                    this.frameAdminEmpresa.minerals.getListaDeMineros().add(mineroNuevo);
+                    JOptionPane.showMessageDialog(new Frame(), "CONTRATADO");
+                } else {
+                    JOptionPane.showMessageDialog(new Frame(), "NO SE PUEDE REALIZAR MAS \n CONTRATACIONES DE MINEROS COMODIN");
+                }
+            }
+            if (jComboBox1.getSelectedItem() == "ORO") {
+
+                Minero mineroNuevo = new Minero(this.frameAdminEmpresa.contadorDeMinerosID, "ORO", 0, 0, 25, 25, rutaImagen);
+                this.frameAdminEmpresa.contadorDeMinerosID++;
+                this.frameAdminEmpresa.minerals.getListaDeMineros().add(mineroNuevo);
+                JOptionPane.showMessageDialog(new Frame(), "CONTRATADO");
+
+            }
+            if (jComboBox1.getSelectedItem() == "PLATA") {
+                Minero mineroNuevo = new Minero(this.frameAdminEmpresa.contadorDeMinerosID, "PLATA", 0, 0, 25, 25, rutaImagen);
+                this.frameAdminEmpresa.contadorDeMinerosID++;
+                this.frameAdminEmpresa.minerals.getListaDeMineros().add(mineroNuevo);
+                JOptionPane.showMessageDialog(new Frame(), "CONTRATADO");
+            }
+            if (jComboBox1.getSelectedItem() == "BRONCE") {
+                Minero mineroNuevo = new Minero(this.frameAdminEmpresa.contadorDeMinerosID, "BRONCE", 0, 0, 25, 25, rutaImagen);
+                this.frameAdminEmpresa.contadorDeMinerosID++;
+                this.frameAdminEmpresa.minerals.getListaDeMineros().add(mineroNuevo);
+                JOptionPane.showMessageDialog(new Frame(), "CONTRATADO");
+            }
+        } else {
+            JOptionPane.showMessageDialog(new Frame(), "SELECCIONE UNA IMAGEN");
+        }
+
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jPanel9MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseMoved
@@ -231,12 +286,20 @@ public class FrameContratarPersonal extends javax.swing.JFrame {
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         this.jRadioButton1.setSelected(false);
         //se selecciona la ruta segun la seleccion
+        this.rutaImagen = "/Imagenes/MineraIcono.png";
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         this.jRadioButton2.setSelected(false);
         //se selecciona la ruta segun la seleccion
+
+        this.rutaImagen = "/Imagenes/MineroIcono.png";
+
     }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments

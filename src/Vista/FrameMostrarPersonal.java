@@ -5,12 +5,21 @@
  */
 package Vista;
 
+import Modelo.Minero;
+import java.util.LinkedList;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.plaf.IconUIResource;
+
 /**
  *
  * @author SAMAEL
  */
 public class FrameMostrarPersonal extends javax.swing.JFrame {
 
+    
+    FrameAdministrarEmpresa frameAdminEmpresa;
+    LinkedList<Minero> listaDeMineros;
     /**
      * Creates new form FrameMostrarPersonal
      */
@@ -322,18 +331,43 @@ public class FrameMostrarPersonal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    public void recibirFramePadre(FrameAdministrarEmpresa frameAdminEmpresa){
+        this.frameAdminEmpresa=frameAdminEmpresa;
+        listaDeMineros=new LinkedList<>();
+    } 
+    
+    public void recibirFrameListaDeMineros(LinkedList<Minero> listaDeMineros) {
+        this.listaDeMineros=listaDeMineros;
+    }
+    
+    public void llenarListaDeJComboBox(){
+        for (int i = 0; i < this.listaDeMineros.size(); i++) {
+            jComboBox1.addItem(listaDeMineros.get(i).getIdMinero()+"");
+        }
+    }
+    
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        FrameAdministrarEmpresa adminEmpresa=new FrameAdministrarEmpresa();
-        adminEmpresa.setVisible(true);
+       this.frameAdminEmpresa.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        //hacer validaciones con los porcentajes .. y demas valores agregar xy ancho y alto imagen segun seleccion.
+        for (int i = 0; i < this.listaDeMineros.size(); i++) {
+            if (this.listaDeMineros.get(i).getIdMinero()==Integer.parseInt((String) jComboBox1.getSelectedItem())) {
+                jLabel9.setText(this.listaDeMineros.get(i).getIdMinero()+"");
+                jLabel10.setText(this.listaDeMineros.get(i).getEspecialidadDelMinero()+"");
+                jLabel11.setText(this.listaDeMineros.get(i).getGananciaMinero()+"");
+                jLabel12.setText(this.listaDeMineros.get(i).isEstadoMineroActivo()+"");
+                jLabel13.setText(this.listaDeMineros.get(i).getCantidadDeMineralExtraido()+"");
+                jLabel3.setIcon(new ImageIcon(this.listaDeMineros.get(i).getImagen().getImage()));
+                
+            }
+        }
 
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -401,4 +435,6 @@ public class FrameMostrarPersonal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel9;
     // End of variables declaration//GEN-END:variables
+
+    
 }
