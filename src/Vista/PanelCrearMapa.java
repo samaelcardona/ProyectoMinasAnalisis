@@ -77,22 +77,32 @@ public class PanelCrearMapa extends javax.swing.JPanel implements MouseMotionLis
         }
         g.drawLine(0, 559, 1120, 559);
 
-        //llenar matriz 
+       //metodo para mostrar la imagen seleccionada sobre el panel y poder moverla
         if (imagenEnMovimientoPanel.getImagen() != null) {
             g.drawImage(imagenEnMovimientoPanel.getImagen().getImage(), imagenEnMovimientoPanel.getPosicionx(), imagenEnMovimientoPanel.getPosiciony(), imagenEnMovimientoPanel.getImagen().getIconWidth(), imagenEnMovimientoPanel.getImagen().getIconHeight(), this);
         }
 
+        
+        //metodo para pintar lo que se va poniendo en el mapa 
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 if (this.frameCrearMapa!=null) {
                     if (this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getImagenTunel() != null) {
                         g.drawImage(this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getImagenTunel().getImage(), (int) this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getX1Tunel(), (int) this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getY1Tunel(), this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getImagenTunel().getIconWidth(), this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getImagenTunel().getIconHeight(), this);
-                        repaint();
+                        g.drawOval(this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getListadeNodosEnElTunel().get(0).getxNodoGrafoMina(), this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getListadeNodosEnElTunel().get(0).getyNOdoGrafoMina(), 10, 10);
+                        g.drawOval(this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getListadeNodosEnElTunel().get(1).getxNodoGrafoMina(), this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getListadeNodosEnElTunel().get(1).getyNOdoGrafoMina(), 10, 10);
+                        g.drawOval(this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getListadeNodosEnElTunel().get(2).getxNodoGrafoMina(), this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getListadeNodosEnElTunel().get(2).getyNOdoGrafoMina(), 10, 10);
+                        g.drawOval(this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getListadeNodosEnElTunel().get(3).getxNodoGrafoMina(), this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getListadeNodosEnElTunel().get(3).getyNOdoGrafoMina(), 10, 10);
                     }
                 }
             }
         }
 
+        //metodo para ir pintando las transiciones o aristas finales
+        for (int i = 0; i < this.frameCrearMapa.controladorCrearMina.getMinaNueva().getListaDeAristasGrafoMina().size(); i++) {
+            g.drawLine(this.frameCrearMapa.controladorCrearMina.getMinaNueva().getListaDeAristasGrafoMina().get(i).getNodoA().getxNodoGrafoMina(), this.frameCrearMapa.controladorCrearMina.getMinaNueva().getListaDeAristasGrafoMina().get(i).getNodoA().getyNOdoGrafoMina(), this.frameCrearMapa.controladorCrearMina.getMinaNueva().getListaDeAristasGrafoMina().get(i).getNodoB().getxNodoGrafoMina(), this.frameCrearMapa.controladorCrearMina.getMinaNueva().getListaDeAristasGrafoMina().get(i).getNodoB().getyNOdoGrafoMina());
+        }
+        
         repaint();
     }
 

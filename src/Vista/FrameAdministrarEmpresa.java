@@ -358,6 +358,7 @@ public class FrameAdministrarEmpresa extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         FrameAdministrarMinas administrarMinas=new FrameAdministrarMinas();
         administrarMinas.recibirFramePadre(this);
+        administrarMinas.llenarListaDeJComboBox();
         administrarMinas.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -375,7 +376,6 @@ public class FrameAdministrarEmpresa extends javax.swing.JFrame {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         FrameMostrarPersonal mostrarPersonal=new FrameMostrarPersonal();
         mostrarPersonal.recibirFramePadre(this);
-        mostrarPersonal.recibirFrameListaDeMineros(this.minerals.getListaDeMineros());
         mostrarPersonal.llenarListaDeJComboBox();
         mostrarPersonal.setVisible(true);
         this.dispose();

@@ -5,6 +5,7 @@
  */
 package Controlador;
 
+import Modelo.AristaGrafoMina;
 import Modelo.Deposito;
 import Modelo.MinaGrafo;
 import Modelo.NodoGrafoMina;
@@ -32,9 +33,9 @@ public class ControladorParaCrearMina {
         contadorParaIdTunelEnMina = 0;
 
         //llenar matriz 
-        for (int i = 1; i <= x; i++) {
-            for (int j = 1; j <= y; j++) {
-                minaNueva.getMatrizTuneles()[i - 1][j - 1]=new Tunel();
+        for (int j = 1; j <= y; j++) {
+            for (int i = 1; i <= x; i++) {
+                minaNueva.getMatrizTuneles()[i - 1][j - 1] = new Tunel();
                 minaNueva.getMatrizTuneles()[i - 1][j - 1].setX1Tunel(((i - 1) * 56));
                 minaNueva.getMatrizTuneles()[i - 1][j - 1].setX2Tunel((i * 56));
                 minaNueva.getMatrizTuneles()[i - 1][j - 1].setY1Tunel(((j - 1) * 56));
@@ -45,15 +46,15 @@ public class ControladorParaCrearMina {
         }
 
     }
-    
-    public void recibirDatosInicialesMina(int idMina,String mineralEnLaMina,int contadorIdDepositos,int cantidadDeMinerosMax,int cantidadDeMineral,int valorTotalMina){
+
+    public void recibirDatosInicialesMina(int idMina, String mineralEnLaMina, int contadorIdDepositos, int cantidadDeMinerosMax, int cantidadDeMineral, int valorTotalMina) {
         this.minaNueva.setIdMina(idMina);
         this.minaNueva.setMineralEnLaMina(mineralEnLaMina);
         this.minaNueva.setCantidadDeMinerosMax(cantidadDeMinerosMax);
         this.minaNueva.setCantidadDeMineralPorDeposito(cantidadDeMineral);
         this.minaNueva.setCostoMina(valorTotalMina);
-        this.contadorIdDeposito=contadorIdDepositos;
-        
+        this.contadorIdDeposito = contadorIdDepositos;
+
         //this.minaNueva.setCostoMina(COSTO); //revisar si se envia el costo de la mina o se calcula
     }
 
@@ -61,83 +62,160 @@ public class ControladorParaCrearMina {
         int[] posicionXY = new int[2];
         LinkedList<NodoGrafoMina> nodosEnTunel = new LinkedList<>();
 
-        
         posicionXY = this.retornarPosicionCuadriculaSeleccionada(xClick, yClick);
-        
+
         ///aca creo los nodos de cada tunel agrego la imagen respectiva
         //nodo superior   se coloca uno en la posicion X + tamano y Y en 0 
         //nodo inferior  se coloca en posicion X=0 y Y + tamano
         //verificar bien lo de arriba pintando.
-        NodoGrafoMina nodo1 = new NodoGrafoMina(Integer.parseInt((minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getIdTunel() + "" + 1)), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getX1Tunel(), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getY1Tunel(), 15, 15);
-        NodoGrafoMina nodo2 = new NodoGrafoMina(Integer.parseInt((minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getIdTunel() + "" + 2)), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getX1Tunel(), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getY1Tunel() + 20, 15, 15);
+        NodoGrafoMina nodo0 = new NodoGrafoMina((minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getIdTunel() + "." + 0), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getX1Tunel(), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getY1Tunel(), 10, 10);
+        NodoGrafoMina nodo1 = new NodoGrafoMina((minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getIdTunel() + "." + 1), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getX1Tunel() + 45, (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getY1Tunel(), 10, 10);
+        NodoGrafoMina nodo2 = new NodoGrafoMina((minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getIdTunel() + "." + 2), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getX1Tunel(), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getY1Tunel() + 45, 10, 10);
+        NodoGrafoMina nodo3 = new NodoGrafoMina((minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getIdTunel() + "." + 3), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getX1Tunel() + 45, (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getY1Tunel() + 45, 10, 10);
 
+        nodosEnTunel.add(nodo0);
         nodosEnTunel.add(nodo1);
         nodosEnTunel.add(nodo2);
+        nodosEnTunel.add(nodo3);
+
+        minaNueva.getListaDeNodosGrafoMina().add(nodo0);
         minaNueva.getListaDeNodosGrafoMina().add(nodo1);
         minaNueva.getListaDeNodosGrafoMina().add(nodo2);
+        minaNueva.getListaDeNodosGrafoMina().add(nodo3);
 
+        //creo las tranciciones de el 
         minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setImagenTunel(new ImageIcon("src\\imagenes\\2.png"));
         minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setListadeNodosEnElTunel(nodosEnTunel);
-        minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setAnchoTunel( minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getImagenTunel().getIconWidth());
-        minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setAltoTunel( minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getImagenTunel().getIconHeight());
-        
-        
+        minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setAnchoTunel(minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getImagenTunel().getIconWidth());
+        minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setAltoTunel(minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getImagenTunel().getIconHeight());
+
+        AristaGrafoMina arista0 = new AristaGrafoMina(nodo1, minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]], nodo0);
+        AristaGrafoMina arista1 = new AristaGrafoMina(nodo2, minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]], nodo3);
+        AristaGrafoMina arista2 = new AristaGrafoMina(nodo1, minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]], nodo3);
+        AristaGrafoMina arista3 = new AristaGrafoMina(nodo3, minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]], nodo1);
+        AristaGrafoMina arista4 = new AristaGrafoMina(nodo0, minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]], nodo2);
+        AristaGrafoMina arista5 = new AristaGrafoMina(nodo2, minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]], nodo0);
+
+        minaNueva.getListaDeAristasGrafoMina().add(arista0);
+        minaNueva.getListaDeAristasGrafoMina().add(arista1);
+        minaNueva.getListaDeAristasGrafoMina().add(arista2);
+        minaNueva.getListaDeAristasGrafoMina().add(arista3);
+        minaNueva.getListaDeAristasGrafoMina().add(arista4);
+        minaNueva.getListaDeAristasGrafoMina().add(arista5);
 
     }
 
     public void agregarElementoTunelDeposito(int xClick, int yClick) {
         int[] posicionXY = new int[2];
-         LinkedList<NodoGrafoMina> nodosEnTunel = new LinkedList<>();
-        
+        LinkedList<NodoGrafoMina> nodosEnTunel = new LinkedList<>();
+
         posicionXY = this.retornarPosicionCuadriculaSeleccionada(xClick, yClick);
-        
+
         ///aca creo los nodos de cada tunel agrego la imagen respectiva
         //nodo superior   se coloca uno en la posicion X + tamano y Y en 0 
         //nodo inferior  se coloca en posicion X=0 y Y + tamano
         //verificar bien lo de arriba pintando.
         //verificar bien lo de los depositos
-        NodoGrafoMina nodo1 = new NodoGrafoMina(Integer.parseInt((minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getIdTunel() + "" + 1)), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getX1Tunel(), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getY1Tunel(), 15, 15);
-        NodoGrafoMina nodo2 = new NodoGrafoMina(Integer.parseInt((minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getIdTunel() + "" + 2)), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getX1Tunel(), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getY1Tunel() + 20, 15, 15);
+        NodoGrafoMina nodo0 = new NodoGrafoMina((minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getIdTunel() + "." + 0), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getX1Tunel(), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getY1Tunel(), 10, 10);
+        NodoGrafoMina nodo1 = new NodoGrafoMina((minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getIdTunel() + "." + 1), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getX1Tunel() + 45, (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getY1Tunel(), 10, 10);
+        NodoGrafoMina nodo2 = new NodoGrafoMina((minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getIdTunel() + "." + 2), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getX1Tunel(), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getY1Tunel() + 45, 10, 10);
+        NodoGrafoMina nodo3 = new NodoGrafoMina((minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getIdTunel() + "." + 3), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getX1Tunel() + 45, (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getY1Tunel() + 45, 10, 10);
 
+        nodosEnTunel.add(nodo0);
         nodosEnTunel.add(nodo1);
         nodosEnTunel.add(nodo2);
+        nodosEnTunel.add(nodo3);
+
+        minaNueva.getListaDeNodosGrafoMina().add(nodo0);
         minaNueva.getListaDeNodosGrafoMina().add(nodo1);
         minaNueva.getListaDeNodosGrafoMina().add(nodo2);
+        minaNueva.getListaDeNodosGrafoMina().add(nodo3);
 
         minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setImagenTunel(new ImageIcon("src\\imagenes\\1.png"));
         minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setListadeNodosEnElTunel(nodosEnTunel);
         minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setTieneDeposito(true);
-        minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setAnchoTunel( minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getImagenTunel().getIconWidth());
-        minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setAltoTunel( minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getImagenTunel().getIconHeight());        
-        minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setDepositoEnElTunel(new Deposito(this.contadorIdDeposito, /*Cantidad de mineral en el deposito puede ser igual para todos*/0, (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getX1Tunel(), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getY1Tunel(), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getAnchoTunel(),(int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getAltoTunel()));
-        
+        minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setAnchoTunel(minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getImagenTunel().getIconWidth());
+        minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setAltoTunel(minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getImagenTunel().getIconHeight());
+        minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setDepositoEnElTunel(new Deposito(this.contadorIdDeposito, /*Cantidad de mineral en el deposito puede ser igual para todos*/ 0, (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getX1Tunel(), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getY1Tunel(), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getAnchoTunel(), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getAltoTunel()));
+
+        //si es deposito internamente no tiene transiciones 
     }
 
     public void agregarElementoTunelEntrada(int xClick, int yClick) {
         int[] posicionXY = new int[2];
-         LinkedList<NodoGrafoMina> nodosEnTunel = new LinkedList<>();
+        LinkedList<NodoGrafoMina> nodosEnTunel = new LinkedList<>();
 
         posicionXY = this.retornarPosicionCuadriculaSeleccionada(xClick, yClick);
-        
-         ///aca creo los nodos de cada tunel agrego la imagen respectiva
+
+        ///aca creo los nodos de cada tunel agrego la imagen respectiva
         //nodo superior   se coloca uno en la posicion X + tamano y Y en 0 
         //nodo inferior  se coloca en posicion X=0 y Y + tamano
         //verificar bien lo de arriba pintando.
-        NodoGrafoMina nodo1 = new NodoGrafoMina(Integer.parseInt((minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getIdTunel() + "" + 1)), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getX1Tunel(), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getY1Tunel(), 15, 15);
-        NodoGrafoMina nodo2 = new NodoGrafoMina(Integer.parseInt((minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getIdTunel() + "" + 2)), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getX1Tunel(), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getY1Tunel() + 20, 15, 15);
+        NodoGrafoMina nodo0 = new NodoGrafoMina((minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getIdTunel() + "." + 0), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getX1Tunel(), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getY1Tunel(), 10, 10);
+        NodoGrafoMina nodo1 = new NodoGrafoMina((minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getIdTunel() + "." + 1), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getX1Tunel() + 45, (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getY1Tunel(), 10, 10);
+        NodoGrafoMina nodo2 = new NodoGrafoMina((minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getIdTunel() + "." + 2), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getX1Tunel(), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getY1Tunel() + 45, 10, 10);
+        NodoGrafoMina nodo3 = new NodoGrafoMina((minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getIdTunel() + "." + 3), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getX1Tunel() + 45, (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getY1Tunel() + 45, 10, 10);
 
+        nodosEnTunel.add(nodo0);
         nodosEnTunel.add(nodo1);
         nodosEnTunel.add(nodo2);
+        nodosEnTunel.add(nodo3);
+
+        minaNueva.getListaDeNodosGrafoMina().add(nodo0);
         minaNueva.getListaDeNodosGrafoMina().add(nodo1);
         minaNueva.getListaDeNodosGrafoMina().add(nodo2);
-        
+        minaNueva.getListaDeNodosGrafoMina().add(nodo3);
+
         minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setImagenTunel(new ImageIcon("src\\imagenes\\0.png"));
         minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setListadeNodosEnElTunel(nodosEnTunel);
         minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setEsEntradaOSalida(true);
-        minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setAnchoTunel( minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getImagenTunel().getIconWidth());
-        minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setAltoTunel( minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getImagenTunel().getIconHeight());
+        minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setAnchoTunel(minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getImagenTunel().getIconWidth());
+        minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setAltoTunel(minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getImagenTunel().getIconHeight());
+
+        //Transiciones internas del nodo 
+        AristaGrafoMina arista0 = new AristaGrafoMina(nodo1, minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]], nodo0);
+        AristaGrafoMina arista1 = new AristaGrafoMina(nodo2, minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]], nodo3);
+        AristaGrafoMina arista2 = new AristaGrafoMina(nodo1, minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]], nodo3);
+        AristaGrafoMina arista3 = new AristaGrafoMina(nodo3, minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]], nodo1);
+        AristaGrafoMina arista4 = new AristaGrafoMina(nodo0, minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]], nodo2);
+        AristaGrafoMina arista5 = new AristaGrafoMina(nodo2, minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]], nodo0);
+
+        minaNueva.getListaDeAristasGrafoMina().add(arista0);
+        minaNueva.getListaDeAristasGrafoMina().add(arista1);
+        minaNueva.getListaDeAristasGrafoMina().add(arista2);
+        minaNueva.getListaDeAristasGrafoMina().add(arista3);
+        minaNueva.getListaDeAristasGrafoMina().add(arista4);
+        minaNueva.getListaDeAristasGrafoMina().add(arista5);
+
+    }
+
+    public void metodoParaCrearLasTransiciones() {
+
+        for (int j = 0; j < y; j++) {
+            for (int i = 0; i < x; i++) {
+                if (minaNueva.getMatrizTuneles()[i][j].getImagenTunel() != null) {
+                    if (minaNueva.getMatrizTuneles()[i+1][j].getImagenTunel() != null) {
+                        AristaGrafoMina arista0=new AristaGrafoMina(minaNueva.getMatrizTuneles()[i+1][j].getListadeNodosEnElTunel().get(0), minaNueva.getMatrizTuneles()[i][j], minaNueva.getMatrizTuneles()[i][j].getListadeNodosEnElTunel().get(1));
+                        AristaGrafoMina arista1=new AristaGrafoMina(minaNueva.getMatrizTuneles()[i][j].getListadeNodosEnElTunel().get(3), minaNueva.getMatrizTuneles()[i][j], minaNueva.getMatrizTuneles()[i+1][j].getListadeNodosEnElTunel().get(2));
+                        
+                        minaNueva.getListaDeAristasGrafoMina().add(arista0);
+                        minaNueva.getListaDeAristasGrafoMina().add(arista1);
         
+                    }
+                    
+                    if (minaNueva.getMatrizTuneles()[i][j+1].getImagenTunel() != null) {
+                        AristaGrafoMina arista0=new AristaGrafoMina(minaNueva.getMatrizTuneles()[i][j].getListadeNodosEnElTunel().get(2), minaNueva.getMatrizTuneles()[i][j], minaNueva.getMatrizTuneles()[i][j+1].getListadeNodosEnElTunel().get(0));
+                        AristaGrafoMina arista1=new AristaGrafoMina(minaNueva.getMatrizTuneles()[i][j+1].getListadeNodosEnElTunel().get(1), minaNueva.getMatrizTuneles()[i][j], minaNueva.getMatrizTuneles()[i][j].getListadeNodosEnElTunel().get(3));
+                        
+                        minaNueva.getListaDeAristasGrafoMina().add(arista0);
+                        minaNueva.getListaDeAristasGrafoMina().add(arista1);
         
+                    }
+
+                }
+            }
+        }
+
     }
 
     public int[] retornarPosicionCuadriculaSeleccionada(int x, int y) {

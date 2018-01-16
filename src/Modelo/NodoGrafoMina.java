@@ -11,14 +11,14 @@ package Modelo;
  */
 public class NodoGrafoMina {
     
-    private int idNodoGrafoMina;
+    private String idNodoGrafoMina;
     private int xNodoGrafoMina;
     private int yNOdoGrafoMina;
     private int anchoNodoGrafoMina;
     private int altoNodoGrafoMina;
 
     //todos los nodos con el mismo ancho y alto cambiar entonces cambio en el construcctor
-    public NodoGrafoMina(int idNodoGrafoMina, int xNodoGrafoMina, int yNOdoGrafoMina, int anchoNodoGrafoMina, int altoNodoGrafoMina) {
+    public NodoGrafoMina(String idNodoGrafoMina, int xNodoGrafoMina, int yNOdoGrafoMina, int anchoNodoGrafoMina, int altoNodoGrafoMina) {
         this.idNodoGrafoMina = idNodoGrafoMina;
         this.xNodoGrafoMina = xNodoGrafoMina;
         this.yNOdoGrafoMina = yNOdoGrafoMina;
@@ -28,11 +28,11 @@ public class NodoGrafoMina {
 
     
     
-    public int getIdNodoGrafoMina() {
+    public String getIdNodoGrafoMina() {
         return idNodoGrafoMina;
     }
 
-    public void setIdNodoGrafoMina(int idNodoGrafoMina) {
+    public void setIdNodoGrafoMina(String idNodoGrafoMina) {
         this.idNodoGrafoMina = idNodoGrafoMina;
     }
 

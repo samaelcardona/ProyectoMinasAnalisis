@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import javax.swing.JComboBox;
+
 /**
  *
  * @author SAMAEL
@@ -96,6 +98,11 @@ public class FrameAdministrarMinas extends javax.swing.JFrame {
         );
 
         jComboBox2.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         jPanel6.setBackground(new java.awt.Color(204, 204, 204));
         jPanel6.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -189,6 +196,11 @@ public class FrameAdministrarMinas extends javax.swing.JFrame {
     public void recibirFramePadre(FrameAdministrarEmpresa frameAdminEmpresa){
         this.frameAdminEmpresa=frameAdminEmpresa;
     }
+    public void llenarListaDeJComboBox(){
+        for (int i = 0; i < this.frameAdminEmpresa.minerals.getListaDeMinas().size(); i++) {
+            jComboBox2.addItem(this.frameAdminEmpresa.minerals.getListaDeMinas().get(i).getIdMina()+"");
+        }
+    }
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.dispose();
@@ -200,13 +212,34 @@ public class FrameAdministrarMinas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        
+        panelAnimacionMina1.recibirPadreFrameCrearMapa(this);
+     //   System.out.println(this.jComboBox2.getSelectedItem()+"");
+        panelAnimacionMina1.setIdMinaParaMostrar(this.jComboBox2.getSelectedItem()+"");
+        
+        
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jPanel6MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseMoved
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel6MouseMoved
 
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    public JComboBox<String> getjComboBox2() {
+        return jComboBox2;
+    }
+
+    public void setjComboBox2(JComboBox<String> jComboBox2) {
+        this.jComboBox2 = jComboBox2;
+    }
+
+    
+    
+    
     /**
      * @param args the command line arguments
      */

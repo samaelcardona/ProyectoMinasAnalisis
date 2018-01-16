@@ -413,6 +413,7 @@ public class FrameCrearMapa extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.controladorCrearMina.recibirDatosInicialesMina(this.frameAdminEmpresa.contadorDeMinasID, this.jComboBox1.getSelectedItem() + "", this.contadorIdDeposito, Integer.parseInt(this.jTextField2.getText()), Integer.parseInt(this.jTextField3.getText()), Integer.parseInt(this.jTextField4.getText()));
+        this.controladorCrearMina.metodoParaCrearLasTransiciones();
         frameAdminEmpresa.contadorDeMinasID++;
         frameAdminEmpresa.minerals.getListaDeMinas().add(this.controladorCrearMina.getMinaNueva());
     }//GEN-LAST:event_jButton4ActionPerformed

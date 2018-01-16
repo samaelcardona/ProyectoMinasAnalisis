@@ -19,7 +19,6 @@ public class FrameMostrarPersonal extends javax.swing.JFrame {
 
     
     FrameAdministrarEmpresa frameAdminEmpresa;
-    LinkedList<Minero> listaDeMineros;
     /**
      * Creates new form FrameMostrarPersonal
      */
@@ -334,16 +333,11 @@ public class FrameMostrarPersonal extends javax.swing.JFrame {
     
     public void recibirFramePadre(FrameAdministrarEmpresa frameAdminEmpresa){
         this.frameAdminEmpresa=frameAdminEmpresa;
-        listaDeMineros=new LinkedList<>();
     } 
-    
-    public void recibirFrameListaDeMineros(LinkedList<Minero> listaDeMineros) {
-        this.listaDeMineros=listaDeMineros;
-    }
-    
+
     public void llenarListaDeJComboBox(){
-        for (int i = 0; i < this.listaDeMineros.size(); i++) {
-            jComboBox1.addItem(listaDeMineros.get(i).getIdMinero()+"");
+        for (int i = 0; i < this.frameAdminEmpresa.minerals.getListaDeMineros().size(); i++) {
+            jComboBox1.addItem(this.frameAdminEmpresa.minerals.getListaDeMineros().get(i).getIdMinero()+"");
         }
     }
     
@@ -357,14 +351,14 @@ public class FrameMostrarPersonal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        for (int i = 0; i < this.listaDeMineros.size(); i++) {
-            if (this.listaDeMineros.get(i).getIdMinero()==Integer.parseInt((String) jComboBox1.getSelectedItem())) {
-                jLabel9.setText(this.listaDeMineros.get(i).getIdMinero()+"");
-                jLabel10.setText(this.listaDeMineros.get(i).getEspecialidadDelMinero()+"");
-                jLabel11.setText(this.listaDeMineros.get(i).getGananciaMinero()+"");
-                jLabel12.setText(this.listaDeMineros.get(i).isEstadoMineroActivo()+"");
-                jLabel13.setText(this.listaDeMineros.get(i).getCantidadDeMineralExtraido()+"");
-                jLabel3.setIcon(new ImageIcon(this.listaDeMineros.get(i).getImagen().getImage()));
+        for (int i = 0; i < this.frameAdminEmpresa.minerals.getListaDeMineros().size(); i++) {
+            if (this.frameAdminEmpresa.minerals.getListaDeMineros().get(i).getIdMinero()==Integer.parseInt((String) jComboBox1.getSelectedItem())) {
+                jLabel9.setText(this.frameAdminEmpresa.minerals.getListaDeMineros().get(i).getIdMinero()+"");
+                jLabel10.setText(this.frameAdminEmpresa.minerals.getListaDeMineros().get(i).getEspecialidadDelMinero()+"");
+                jLabel11.setText(this.frameAdminEmpresa.minerals.getListaDeMineros().get(i).getGananciaMinero()+"");
+                jLabel12.setText(this.frameAdminEmpresa.minerals.getListaDeMineros().get(i).isEstadoMineroActivo()+"");
+                jLabel13.setText(this.frameAdminEmpresa.minerals.getListaDeMineros().get(i).getCantidadDeMineralExtraido()+"");
+                jLabel3.setIcon(new ImageIcon(this.frameAdminEmpresa.minerals.getListaDeMineros().get(i).getImagen().getImage()));
                 
             }
         }
