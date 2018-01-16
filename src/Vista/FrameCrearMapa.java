@@ -8,6 +8,7 @@ package Vista;
 import Controlador.ControladorParaCrearMina;
 import Modelo.ImagenARotar;
 import Modelo.Tunel;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.util.LinkedList;
 import javax.swing.ImageIcon;
@@ -18,39 +19,44 @@ import javax.swing.JRadioButton;
  * @author Victor
  */
 public class FrameCrearMapa extends javax.swing.JFrame {
-   
-    
+
     static FrameCrearMapa frameMapa;
     FrameAdministrarEmpresa frameAdminEmpresa;
     LinkedList<JRadioButton> botones;
     ImageIcon[] listaImagenesParaSeleccionar;
     ControladorParaCrearMina controladorCrearMina;
     int contadorIdDeposito;
-    
+
     public FrameCrearMapa() {
-         setUndecorated(true);
+        setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
-        
+
         botones = new LinkedList();
-       
-        
+
         this.botones.add(jRadioButton1);
         this.botones.add(jRadioButton2);
         this.botones.add(jRadioButton3);
-        
-        listaImagenesParaSeleccionar= new ImageIcon[botones.size()];
-        
+
+        listaImagenesParaSeleccionar = new ImageIcon[botones.size()];
+
         for (int i = 0; i < botones.size(); i++) {
             ImageIcon imagen = new ImageIcon("src\\imagenes\\" + i + ".png");
             this.botones.get(i).setIcon(imagen);
             listaImagenesParaSeleccionar[i] = imagen;
         }
-    
-        contadorIdDeposito=1;
-        
-        this.controladorCrearMina=new ControladorParaCrearMina();
-        this.panelCrearMapa2.recibirPadreFrameCrearMapa(this);
+
+        contadorIdDeposito = 1;
+
+        this.controladorCrearMina = new ControladorParaCrearMina();
+        this.panelCrearMapa1.recibirPadreFrameCrearMapa(this);
+    }
+
+    @Override
+    public void paintComponents(Graphics grphcs) {
+        super.paintComponents(grphcs); //To change body of generated methods, choose Tools | Templates.
+
+        repaint();
     }
 
     /**
@@ -62,12 +68,9 @@ public class FrameCrearMapa extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelCrearMapa2 = new Vista.PanelCrearMapa();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
@@ -88,20 +91,10 @@ public class FrameCrearMapa extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
+        panelCrearMapa1 = new Vista.PanelCrearMapa();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
-
-        javax.swing.GroupLayout panelCrearMapa2Layout = new javax.swing.GroupLayout(panelCrearMapa2);
-        panelCrearMapa2.setLayout(panelCrearMapa2Layout);
-        panelCrearMapa2Layout.setHorizontalGroup(
-            panelCrearMapa2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1120, Short.MAX_VALUE)
-        );
-        panelCrearMapa2Layout.setVerticalGroup(
-            panelCrearMapa2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
-        );
 
         jRadioButton1.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/02.png"))); // NOI18N
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -123,11 +116,6 @@ public class FrameCrearMapa extends javax.swing.JFrame {
                 jRadioButton3ActionPerformed(evt);
             }
         });
-
-        jLabel1.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jLabel1.setText("ID");
-
-        jTextField1.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel2.setText("MINERAL");
@@ -303,6 +291,17 @@ public class FrameCrearMapa extends javax.swing.JFrame {
                 .addGap(64, 64, 64))
         );
 
+        javax.swing.GroupLayout panelCrearMapa1Layout = new javax.swing.GroupLayout(panelCrearMapa1);
+        panelCrearMapa1.setLayout(panelCrearMapa1Layout);
+        panelCrearMapa1Layout.setHorizontalGroup(
+            panelCrearMapa1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1120, Short.MAX_VALUE)
+        );
+        panelCrearMapa1Layout.setVerticalGroup(
+            panelCrearMapa1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 560, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -310,11 +309,14 @@ public class FrameCrearMapa extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel1)
-                        .addComponent(jTextField1)
-                        .addComponent(jLabel2)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jRadioButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jRadioButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jRadioButton3))
                     .addComponent(jLabel3)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
@@ -326,15 +328,9 @@ public class FrameCrearMapa extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButton3)))
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(panelCrearMapa2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelCrearMapa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -344,17 +340,12 @@ public class FrameCrearMapa extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelCrearMapa2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRadioButton1)
                             .addComponent(jRadioButton2)
                             .addComponent(jRadioButton3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -375,43 +366,40 @@ public class FrameCrearMapa extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(panelCrearMapa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        getContentPane().add(panelCrearMapa2);
-        panelCrearMapa2.setBounds(20, 10, 1120, 560);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void recibirFramePadre(FrameAdministrarEmpresa frameAdminEmpresa){
-        this.frameAdminEmpresa=frameAdminEmpresa;
+    public void recibirFramePadre(FrameAdministrarEmpresa frameAdminEmpresa) {
+        this.frameAdminEmpresa = frameAdminEmpresa;
     }
-    
-    
-    
+
+
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-       
-       panelCrearMapa2.getImagenEnMovimientoPanel().setImagen(new ImageIcon("src\\imagenes\\0.png"));
+
+        panelCrearMapa1.getImagenEnMovimientoPanel().setImagen(new ImageIcon("src\\imagenes\\0.png"));
         this.jRadioButton2.setSelected(false);
         this.jRadioButton3.setSelected(false);
-        this.panelCrearMapa2.setFrameCrearMapa(this);
+        this.panelCrearMapa1.setFrameCrearMapa(this);
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
-       panelCrearMapa2.getImagenEnMovimientoPanel().setImagen(new ImageIcon("src\\imagenes\\2.png"));
+        panelCrearMapa1.getImagenEnMovimientoPanel().setImagen(new ImageIcon("src\\imagenes\\2.png"));
         this.jRadioButton2.setSelected(false);
         this.jRadioButton1.setSelected(false);
-        this.panelCrearMapa2.setFrameCrearMapa(this);
+        this.panelCrearMapa1.setFrameCrearMapa(this);
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
 
-        panelCrearMapa2.getImagenEnMovimientoPanel().setImagen(new ImageIcon("src\\imagenes\\1.png"));
+        panelCrearMapa1.getImagenEnMovimientoPanel().setImagen(new ImageIcon("src\\imagenes\\1.png"));
         this.jRadioButton1.setSelected(false);
         this.jRadioButton3.setSelected(false);
-        this.panelCrearMapa2.setFrameCrearMapa(this);
+        this.panelCrearMapa1.setFrameCrearMapa(this);
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -424,7 +412,8 @@ public class FrameCrearMapa extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        this.controladorCrearMina.recibirDatosInicialesMina(this.frameAdminEmpresa.contadorDeMinasID, this.jComboBox1.getSelectedItem()+"",this.contadorIdDeposito,Integer.parseInt(this.jTextField2.getText()),Integer.parseInt(this.jTextField3.getText()),Integer.parseInt(this.jTextField4.getText()));
+        this.controladorCrearMina.recibirDatosInicialesMina(this.frameAdminEmpresa.contadorDeMinasID, this.jComboBox1.getSelectedItem() + "", this.contadorIdDeposito, Integer.parseInt(this.jTextField2.getText()), Integer.parseInt(this.jTextField3.getText()), Integer.parseInt(this.jTextField4.getText()));
+        frameAdminEmpresa.contadorDeMinasID++;
         frameAdminEmpresa.minerals.getListaDeMinas().add(this.controladorCrearMina.getMinaNueva());
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -482,8 +471,8 @@ public class FrameCrearMapa extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-            frameMapa = new FrameCrearMapa();
-            frameMapa.setVisible(true);
+                frameMapa = new FrameCrearMapa();
+                frameMapa.setVisible(true);
             }
         });
     }
@@ -494,7 +483,6 @@ public class FrameCrearMapa extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -510,11 +498,10 @@ public class FrameCrearMapa extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private Vista.PanelCrearMapa panelCrearMapa2;
+    private Vista.PanelCrearMapa panelCrearMapa1;
     // End of variables declaration//GEN-END:variables
 
     public JRadioButton getjRadioButton1() {
@@ -540,7 +527,5 @@ public class FrameCrearMapa extends javax.swing.JFrame {
     public void setjRadioButton3(JRadioButton jRadioButton3) {
         this.jRadioButton3 = jRadioButton3;
     }
-
-  
 
 }
