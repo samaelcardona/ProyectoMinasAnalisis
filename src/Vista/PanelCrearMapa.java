@@ -28,6 +28,7 @@ public class PanelCrearMapa extends javax.swing.JPanel implements MouseMotionLis
     int y = 10;
     private ControladorParaCrearMina controladorParaCrearMina;
     private FrameCrearMapa frameCrearMapa;
+    private boolean iniciarGraficosEnPaint=false;
 
     public PanelCrearMapa() {
         initComponents();
@@ -77,16 +78,15 @@ public class PanelCrearMapa extends javax.swing.JPanel implements MouseMotionLis
         }
         g.drawLine(0, 559, 1120, 559);
 
-       //metodo para mostrar la imagen seleccionada sobre el panel y poder moverla
+        //metodo para mostrar la imagen seleccionada sobre el panel y poder moverla
         if (imagenEnMovimientoPanel.getImagen() != null) {
             g.drawImage(imagenEnMovimientoPanel.getImagen().getImage(), imagenEnMovimientoPanel.getPosicionx(), imagenEnMovimientoPanel.getPosiciony(), imagenEnMovimientoPanel.getImagen().getIconWidth(), imagenEnMovimientoPanel.getImagen().getIconHeight(), this);
         }
 
-        
         //metodo para pintar lo que se va poniendo en el mapa 
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
-                if (this.frameCrearMapa!=null) {
+                if (this.frameCrearMapa != null) {
                     if (this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getImagenTunel() != null) {
                         g.drawImage(this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getImagenTunel().getImage(), (int) this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getX1Tunel(), (int) this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getY1Tunel(), this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getImagenTunel().getIconWidth(), this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getImagenTunel().getIconHeight(), this);
                         g.drawOval(this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getListadeNodosEnElTunel().get(0).getxNodoGrafoMina(), this.frameCrearMapa.controladorCrearMina.getMinaNueva().getMatrizTuneles()[i][j].getListadeNodosEnElTunel().get(0).getyNOdoGrafoMina(), 10, 10);
@@ -99,10 +99,12 @@ public class PanelCrearMapa extends javax.swing.JPanel implements MouseMotionLis
         }
 
         //metodo para ir pintando las transiciones o aristas finales
-        for (int i = 0; i < this.frameCrearMapa.controladorCrearMina.getMinaNueva().getListaDeAristasGrafoMina().size(); i++) {
-            g.drawLine(this.frameCrearMapa.controladorCrearMina.getMinaNueva().getListaDeAristasGrafoMina().get(i).getNodoA().getxNodoGrafoMina(), this.frameCrearMapa.controladorCrearMina.getMinaNueva().getListaDeAristasGrafoMina().get(i).getNodoA().getyNOdoGrafoMina(), this.frameCrearMapa.controladorCrearMina.getMinaNueva().getListaDeAristasGrafoMina().get(i).getNodoB().getxNodoGrafoMina(), this.frameCrearMapa.controladorCrearMina.getMinaNueva().getListaDeAristasGrafoMina().get(i).getNodoB().getyNOdoGrafoMina());
+        if (this.iniciarGraficosEnPaint==true) {
+            for (int i = 0; i < this.frameCrearMapa.controladorCrearMina.getMinaNueva().getListaDeAristasGrafoMina().size(); i++) {
+                g.drawLine(this.frameCrearMapa.controladorCrearMina.getMinaNueva().getListaDeAristasGrafoMina().get(i).getNodoA().getxNodoGrafoMina(), this.frameCrearMapa.controladorCrearMina.getMinaNueva().getListaDeAristasGrafoMina().get(i).getNodoA().getyNOdoGrafoMina(), this.frameCrearMapa.controladorCrearMina.getMinaNueva().getListaDeAristasGrafoMina().get(i).getNodoB().getxNodoGrafoMina(), this.frameCrearMapa.controladorCrearMina.getMinaNueva().getListaDeAristasGrafoMina().get(i).getNodoB().getyNOdoGrafoMina());
+            }
         }
-        
+
         repaint();
     }
 
@@ -146,6 +148,15 @@ public class PanelCrearMapa extends javax.swing.JPanel implements MouseMotionLis
 
         repaint();
     }
+
+    public boolean isIniciarGraficosEnPaint() {
+        return iniciarGraficosEnPaint;
+    }
+
+    public void setIniciarGraficosEnPaint(boolean iniciarGraficosEnPaint) {
+        this.iniciarGraficosEnPaint = iniciarGraficosEnPaint;
+    }
+    
 
     @Override
     public void mousePressed(MouseEvent e) {

@@ -27,9 +27,9 @@ public class ControladorParaCrearMina {
     int contadorIdDeposito;
 
     public ControladorParaCrearMina() {
-        minaNueva = new MinaGrafo(0, "", new Tunel[x][y]);
         x = 20;
         y = 10;
+        minaNueva = new MinaGrafo(0, "", new Tunel[x][y]);
         contadorParaIdTunelEnMina = 0;
 
         //llenar matriz 

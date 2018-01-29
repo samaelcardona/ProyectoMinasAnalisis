@@ -478,6 +478,10 @@ public class FrameCrearMapa extends javax.swing.JFrame {
         });
     }
 
+    public void iniciarPanel(){
+        this.panelCrearMapa1.setIniciarGraficosEnPaint(true);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

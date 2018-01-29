@@ -387,6 +387,7 @@ public class FrameAdministrarEmpresa extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         FrameCrearMapa crearmina=new FrameCrearMapa();
+        crearmina.iniciarPanel();
         crearmina.recibirFramePadre(this);
         crearmina.setVisible(true);
         this.dispose();

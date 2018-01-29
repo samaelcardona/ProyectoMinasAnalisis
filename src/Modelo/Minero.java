@@ -25,6 +25,7 @@ public class Minero {
     private int altoMinero;// alto minero
     private ImageIcon imagen;//imagen del minero
     private boolean mover;//Si se puede mover o no
+    ///Crear lista para guardar ruta del minero revisar proyecto pasado! 
     
 
     public Minero(int idMinero, String especialidadDelMinero, int xMinero, int yMinero, int anchoMinero, int altoMinero,String rutaImagen) {
