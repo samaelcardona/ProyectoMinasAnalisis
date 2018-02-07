@@ -23,6 +23,7 @@ public class MinaGrafo {
     private LinkedList<AristaGrafoMina> listaDeAristasGrafoMina;
     private LinkedList<NodoGrafoMina> listaDeNodosGrafoMina;
     private Tunel [][] matrizTuneles;
+    private LinkedList<Tunel> listaTunelesMinaDepositos;
     private double costoMina;
 
     public MinaGrafo(int idMina, String mineralEnLaMina, Tunel[][] matrizTuneles) {
@@ -39,8 +40,18 @@ public class MinaGrafo {
         this.listaDeAristasGrafoMina = new LinkedList<>();
         this.listaDeNodosGrafoMina = new LinkedList<>();
         this.matrizTuneles = new Tunel[20][10];
+        this.listaTunelesMinaDepositos=new LinkedList<>();
         this.costoMina=0;
     }
+
+    public LinkedList<Tunel> getListaTunelesMinaDepositos() {
+        return listaTunelesMinaDepositos;
+    }
+
+    public void setListaTunelesMinaDepositos(LinkedList<Tunel> listaTunelesMinaDepositos) {
+        this.listaTunelesMinaDepositos = listaTunelesMinaDepositos;
+    }
+    
 
     public int getCantidadDeMineralPorDeposito() {
         return cantidadDeMineralPorDeposito;

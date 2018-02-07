@@ -5,7 +5,10 @@
  */
 package Vista;
 
+import Controlador.ControladorAsignacionDeMineros;
 import Modelo.CompaniaMinera;
+import Modelo.MinaGrafo;
+import java.util.LinkedList;
 
 /**
  *
@@ -18,6 +21,7 @@ public class FrameAdministrarEmpresa extends javax.swing.JFrame {
     CompaniaMinera minerals;//creo la compania minera
     int contadorDeMinerosID;//variable para darle el id a cada minero.
     int contadorDeMinasID;//variable para darle el id a cada mina.
+    ControladorAsignacionDeMineros controladorAsignacionDeMineros;
     
     /**
      * Creates new form FrameAdministrarEmpresa
@@ -338,6 +342,11 @@ public class FrameAdministrarEmpresa extends javax.swing.JFrame {
         this.minerals=minerals;
     }
     
+    public void modificarListasMinas(LinkedList<MinaGrafo> listaDeMinas){
+        
+        minerals.setListaDeMinas(listaDeMinas);
+        
+    }
     
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -357,6 +366,12 @@ public class FrameAdministrarEmpresa extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         FrameAdministrarMinas administrarMinas=new FrameAdministrarMinas();
+        controladorAsignacionDeMineros=new ControladorAsignacionDeMineros(minerals.getListaDeMinas(), minerals.getListaDeMineros(), this);
+        controladorAsignacionDeMineros.asignarMineros();
+        for (int i = 0; i < minerals.getListaDeMinas().size(); i++) {
+            System.out.println("mina"+minerals.getListaDeMinas().get(i).getIdMina()+"Mineros"+(minerals.getListaDeMinas().get(i).getListaDeMinerosEspecializadosEnMina().size()+minerals.getListaDeMinas().get(i).getListaDeMinerosComodinsEnMina().size()));
+        }
+        
         administrarMinas.recibirFramePadre(this);
         administrarMinas.llenarListaDeJComboBox();
         administrarMinas.setVisible(true);

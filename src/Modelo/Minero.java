@@ -25,6 +25,7 @@ public class Minero {
     private int altoMinero;// alto minero
     private ImageIcon imagen;//imagen del minero
     private boolean mover;//Si se puede mover o no
+    private int capacidadCarga;
     ///Crear lista para guardar ruta del minero revisar proyecto pasado! 
     
 
@@ -42,6 +43,7 @@ public class Minero {
         this.gananciaMinero=0;
         this.velocidadMinero=10;
         this.cantidadDeMineralExtraido=0;
+        this.capacidadCarga=6;
         
     }
 

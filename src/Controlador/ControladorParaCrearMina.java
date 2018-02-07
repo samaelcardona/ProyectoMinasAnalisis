@@ -89,6 +89,8 @@ public class ControladorParaCrearMina {
         minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setAnchoTunel(minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getImagenTunel().getIconWidth());
         minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setAltoTunel(minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getImagenTunel().getIconHeight());
 
+        minaNueva.getListaTunelesMina().add(minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]]);
+        
         AristaGrafoMina arista0 = new AristaGrafoMina(nodo1, minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]], nodo0);
         AristaGrafoMina arista1 = new AristaGrafoMina(nodo2, minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]], nodo3);
         AristaGrafoMina arista2 = new AristaGrafoMina(nodo1, minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]], nodo3);
@@ -138,7 +140,12 @@ public class ControladorParaCrearMina {
         minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setAltoTunel(minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getImagenTunel().getIconHeight());
         minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setDepositoEnElTunel(new Deposito(this.contadorIdDeposito, /*Cantidad de mineral en el deposito puede ser igual para todos*/ 0, (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getX1Tunel(), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getY1Tunel(), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getAnchoTunel(), (int) minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getAltoTunel()));
 
+        minaNueva.getListaTunelesMina().add(minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]]);
+        minaNueva.getListaTunelesMinaDepositos().add(minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]]);
+        
         //si es deposito internamente no tiene transiciones 
+        
+        
     }
 
     public void agregarElementoTunelEntrada(int xClick, int yClick) {
@@ -171,6 +178,8 @@ public class ControladorParaCrearMina {
         minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setEsEntradaOSalida(true);
         minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setAnchoTunel(minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getImagenTunel().getIconWidth());
         minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].setAltoTunel(minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]].getImagenTunel().getIconHeight());
+
+        minaNueva.getListaTunelesMina().add(minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]]);
 
         //Transiciones internas del nodo 
         AristaGrafoMina arista0 = new AristaGrafoMina(nodo1, minaNueva.getMatrizTuneles()[posicionXY[0]][posicionXY[1]], nodo0);
