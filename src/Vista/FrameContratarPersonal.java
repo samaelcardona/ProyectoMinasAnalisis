@@ -245,7 +245,7 @@ public class FrameContratarPersonal extends javax.swing.JFrame {
             if (jComboBox1.getSelectedItem() == "COMODIN") {
                 ///verifico el porcentaje de mineros comodin
                 if (this.controladorContrato.verificarMinerosComodin() == true) {
-                    Minero mineroNuevo = new Minero(this.frameAdminEmpresa.contadorDeMinerosID, "COMODIN", 0, 0, 25, 25, rutaImagen);
+                    Minero mineroNuevo = new Minero(this.frameAdminEmpresa.contadorDeMinerosID, "COMODIN", 0, 0, 25, 25, rutaImagen,5);
                     this.frameAdminEmpresa.contadorDeMinerosID++;
                     this.frameAdminEmpresa.minerals.getListaDeMineros().add(mineroNuevo);
                     JOptionPane.showMessageDialog(new Frame(), "CONTRATADO");
@@ -255,20 +255,20 @@ public class FrameContratarPersonal extends javax.swing.JFrame {
             }
             if (jComboBox1.getSelectedItem() == "ORO") {
 
-                Minero mineroNuevo = new Minero(this.frameAdminEmpresa.contadorDeMinerosID, "ORO", 0, 0, 25, 25, rutaImagen);
+                Minero mineroNuevo = new Minero(this.frameAdminEmpresa.contadorDeMinerosID, "ORO", 0, 0, 25, 25, rutaImagen,5);
                 this.frameAdminEmpresa.contadorDeMinerosID++;
                 this.frameAdminEmpresa.minerals.getListaDeMineros().add(mineroNuevo);
                 JOptionPane.showMessageDialog(new Frame(), "CONTRATADO");
 
             }
             if (jComboBox1.getSelectedItem() == "PLATA") {
-                Minero mineroNuevo = new Minero(this.frameAdminEmpresa.contadorDeMinerosID, "PLATA", 0, 0, 25, 25, rutaImagen);
+                Minero mineroNuevo = new Minero(this.frameAdminEmpresa.contadorDeMinerosID, "PLATA", 0, 0, 25, 25, rutaImagen,5);
                 this.frameAdminEmpresa.contadorDeMinerosID++;
                 this.frameAdminEmpresa.minerals.getListaDeMineros().add(mineroNuevo);
                 JOptionPane.showMessageDialog(new Frame(), "CONTRATADO");
             }
             if (jComboBox1.getSelectedItem() == "BRONCE") {
-                Minero mineroNuevo = new Minero(this.frameAdminEmpresa.contadorDeMinerosID, "BRONCE", 0, 0, 25, 25, rutaImagen);
+                Minero mineroNuevo = new Minero(this.frameAdminEmpresa.contadorDeMinerosID, "BRONCE", 0, 0, 25, 25, rutaImagen,5);
                 this.frameAdminEmpresa.contadorDeMinerosID++;
                 this.frameAdminEmpresa.minerals.getListaDeMineros().add(mineroNuevo);
                 JOptionPane.showMessageDialog(new Frame(), "CONTRATADO");

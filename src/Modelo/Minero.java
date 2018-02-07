@@ -29,7 +29,7 @@ public class Minero {
     ///Crear lista para guardar ruta del minero revisar proyecto pasado! 
     
 
-    public Minero(int idMinero, String especialidadDelMinero, int xMinero, int yMinero, int anchoMinero, int altoMinero,String rutaImagen) {
+    public Minero(int idMinero, String especialidadDelMinero, int xMinero, int yMinero, int anchoMinero, int altoMinero,String rutaImagen,int capacidadCarga) {
         this.idMinero = idMinero;
         this.especialidadDelMinero = especialidadDelMinero;
         this.xMinero = xMinero;
@@ -43,12 +43,19 @@ public class Minero {
         this.gananciaMinero=0;
         this.velocidadMinero=10;
         this.cantidadDeMineralExtraido=0;
-        this.capacidadCarga=6;
+        this.capacidadCarga=capacidadCarga;
         
     }
 
+    public int getCapacidadCarga() {
+        return capacidadCarga;
+    }
+
+    public void setCapacidadCarga(int capacidadCarga) {
+        this.capacidadCarga = capacidadCarga;
+    }
+
     
-   
     public ImageIcon getImagen() {
         return imagen;
     }
