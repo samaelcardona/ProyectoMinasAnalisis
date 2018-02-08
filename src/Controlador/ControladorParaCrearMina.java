@@ -226,7 +226,33 @@ public class ControladorParaCrearMina {
         }
 
     }
+    
+    public void metodoParaLlenarMatrizDeAdyacencia(){
+        minaNueva.setMatrizGrafoMapaAdyacenciaRutaMasCorta(new int[minaNueva.getListaDeNodosGrafoMina().size()][minaNueva.getListaDeNodosGrafoMina().size()]);
+        
+        for (int i = 0; i < minaNueva.getMatrizGrafoMapaAdyacenciaRutaMasCorta().length; i++) {
+            for (int j = 0; j < minaNueva.getMatrizGrafoMapaAdyacenciaRutaMasCorta().length; j++) {
+                minaNueva.getMatrizGrafoMapaAdyacenciaRutaMasCorta()[j][i] = -1;
+            }
+        }
+        
+        
+         for (int i = 0; i < minaNueva.getListaDeAristasGrafoMina().size(); i++) {
+            minaNueva.getMatrizGrafoMapaAdyacenciaRutaMasCorta()[this.buscarIdEnlistaDeNodos(minaNueva.getListaDeAristasGrafoMina().get(i).getNodoA().getIdNodoGrafoMina())][this.buscarIdEnlistaDeNodos(minaNueva.getListaDeAristasGrafoMina().get(i).getNodoA().getIdNodoGrafoMina())] = 10;
+        }
+    }
 
+    
+    public int buscarIdEnlistaDeNodos(String id) {
+
+        for (int i = 0; i < minaNueva.getListaDeNodosGrafoMina().size(); i++) {
+            if (id.equals(minaNueva.getListaDeNodosGrafoMina().get(i).getIdNodoGrafoMina())) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    
     public int[] retornarPosicionCuadriculaSeleccionada(int x, int y) {
 
         boolean encontroX = false;

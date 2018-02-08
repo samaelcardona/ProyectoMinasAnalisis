@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Controlador.ControladorAnimacion;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
 
@@ -12,19 +13,20 @@ import javax.swing.ImageIcon;
  *
  * @author SAMAEL
  */
-public class PanelAnimacionMina extends javax.swing.JPanel {
+public class PanelAnimacionMina extends javax.swing.JPanel implements Runnable {
 
     int x = 20;
     int y = 10;
+     int h = 0;
     FrameAdministrarMinas frameAdministrarMinas;
     String idMinaParaMostrar;
+    ControladorAnimacion controladorAnimacion;
 
     /**
      * Creates new form PanelAnimacionMina
      */
     public PanelAnimacionMina() {
         initComponents();
-
 
     }
 
@@ -47,8 +49,8 @@ public class PanelAnimacionMina extends javax.swing.JPanel {
         g.drawLine(0, 559, 1120, 559);
 
         //metodo para pintar lo que se va poniendo en el mapa 
-        if (idMinaParaMostrar!=null) {
-            for (int h = 0; h < this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().size(); h++) {                
+        if (idMinaParaMostrar != null) {
+            for (int h = 0; h < this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().size(); h++) {
                 if (idMinaParaMostrar.equals(this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getIdMina() + "")) {
                     for (int i = 0; i < x; i++) {
                         for (int j = 0; j < y; j++) {
@@ -60,34 +62,33 @@ public class PanelAnimacionMina extends javax.swing.JPanel {
                                     g.drawOval(this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getMatrizTuneles()[i][j].getListadeNodosEnElTunel().get(1).getxNodoGrafoMina(), this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getMatrizTuneles()[i][j].getListadeNodosEnElTunel().get(1).getyNOdoGrafoMina(), 10, 10);
                                     g.drawOval(this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getMatrizTuneles()[i][j].getListadeNodosEnElTunel().get(2).getxNodoGrafoMina(), this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getMatrizTuneles()[i][j].getListadeNodosEnElTunel().get(2).getyNOdoGrafoMina(), 10, 10);
                                     g.drawOval(this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getMatrizTuneles()[i][j].getListadeNodosEnElTunel().get(3).getxNodoGrafoMina(), this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getMatrizTuneles()[i][j].getListadeNodosEnElTunel().get(3).getyNOdoGrafoMina(), 10, 10);
-                                
+
                                 }
                             }
 
                         }
                     }
-                    
+
                     for (int i = 0; i < this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getListaDeMinerosEspecializadosEnMina().size(); i++) {
                         g.drawImage(this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getListaDeMinerosEspecializadosEnMina().get(i).getImagen().getImage(), (int) this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getListaDeMinerosEspecializadosEnMina().get(i).getxMinero(), (int) this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getListaDeMinerosEspecializadosEnMina().get(i).getyMinero(), this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getListaDeMinerosEspecializadosEnMina().get(i).getImagen().getIconWidth(), this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getListaDeMinerosEspecializadosEnMina().get(i).getImagen().getIconHeight(), this);
-                        
+
                     }
-                    
+
                     for (int i = 0; i < this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getListaDeMinerosComodinsEnMina().size(); i++) {
                         g.drawImage(this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getListaDeMinerosComodinsEnMina().get(i).getImagen().getImage(), (int) this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getListaDeMinerosComodinsEnMina().get(i).getxMinero(), (int) this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getListaDeMinerosComodinsEnMina().get(i).getyMinero(), this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getListaDeMinerosComodinsEnMina().get(i).getImagen().getIconWidth(), this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getListaDeMinerosComodinsEnMina().get(i).getImagen().getIconHeight(), this);
-                        
+
                     }
-                    
 
                     //metodo para ir pintando las transiciones o aristas finales
-                   // System.out.println("Cantidad de aristas"+this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getListaDeAristasGrafoMina().size());
+                    // System.out.println("Cantidad de aristas"+this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getListaDeAristasGrafoMina().size());
                     for (int i = 0; i < this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getListaDeAristasGrafoMina().size(); i++) {
-                       // System.out.println("x nodo A"+this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getListaDeAristasGrafoMina().get(i).getNodoA().getxNodoGrafoMina());
+                        // System.out.println("x nodo A"+this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getListaDeAristasGrafoMina().get(i).getNodoA().getxNodoGrafoMina());
                         g.drawLine(this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getListaDeAristasGrafoMina().get(i).getNodoA().getxNodoGrafoMina(), this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getListaDeAristasGrafoMina().get(i).getNodoA().getyNOdoGrafoMina(), this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getListaDeAristasGrafoMina().get(i).getNodoB().getxNodoGrafoMina(), this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas().get(h).getListaDeAristasGrafoMina().get(i).getNodoB().getyNOdoGrafoMina());
                     }
                 }
             }
         }
-        
+
         repaint();
     }
 
@@ -114,6 +115,14 @@ public class PanelAnimacionMina extends javax.swing.JPanel {
 
     public void recibirPadreFrameCrearMapa(FrameAdministrarMinas frameAdministrarMinas) {
         this.frameAdministrarMinas = frameAdministrarMinas;
+
+       
+        this.controladorAnimacion = new ControladorAnimacion(this.frameAdministrarMinas.frameAdminEmpresa.minerals.getListaDeMinas(), frameAdministrarMinas);
+
+        if (h == 0) {
+            frameAdministrarMinas.hilo.start();
+            h++;
+        }
     }
 
     public String getIdMinaParaMostrar() {
@@ -122,6 +131,30 @@ public class PanelAnimacionMina extends javax.swing.JPanel {
 
     public void setIdMinaParaMostrar(String idMinaParaMostrar) {
         this.idMinaParaMostrar = idMinaParaMostrar;
+    }
+
+    @Override
+    public void run() {
+
+        while (true) {
+            System.out.println("Runn");
+            for (int i = 0; i < frameAdministrarMinas.getFrameAdminEmpresa().getMinerals().getListaDeMinas().size(); i++) {
+                for (int j = 0; j < frameAdministrarMinas.getFrameAdminEmpresa().getMinerals().getListaDeMinas().get(i).getListaTotalDeMineros().size(); j++) {
+
+                    // System.out.println("Mina" + frameAdministrarMinas.getFrameAdminEmpresa().getMinerals().getListaDeMinas().get(i).getIdMina() + "Minero" + frameAdministrarMinas.getFrameAdminEmpresa().getMinerals().getListaDeMinas().get(i).getListaTotalDeMineros().get(j).getIdMinero() + "Especialidad" + frameAdministrarMinas.getFrameAdminEmpresa().getMinerals().getListaDeMinas().get(i).getListaTotalDeMineros().get(j).getEspecialidadDelMinero());
+                    //si no tiene ruta .. busco la ruta al deposito mas sercano que tenga la capacidad para almacenarme
+                    if (frameAdministrarMinas.getFrameAdminEmpresa().getMinerals().getListaDeMinas().get(i).getListaTotalDeMineros().get(j).getRutaDeNodosAvisitar().isEmpty()) {
+
+                        //frameAdministrarMinas.getFrameAdminEmpresa().getMinerals().getListaDeMinas().get(i).getListaTotalDeMineros().get(j).setRutaDeNodosAvisitar(controladorAnimacion.rutaParaMinero(frameAdministrarMinas.getFrameAdminEmpresa().getMinerals().getListaDeMinas().get(i), controladorAnimacion.buscarEntradaALaMinaNodo(frameAdministrarMinas.getFrameAdminEmpresa().getMinerals().getListaDeMinas().get(i)), frameAdministrarMinas.getFrameAdminEmpresa().getMinerals().getListaDeMinas().get(i).getListaTunelesMinaDepositos().get(0).getListadeNodosEnElTunel().get(0).getIdNodoGrafoMina()));
+
+                       // frameAdministrarMinas.getFrameAdminEmpresa().getMinerals().getListaDeMinas().get(i).getListaTotalDeMineros().get(j).setDepositoActual(frameAdministrarMinas.getFrameAdminEmpresa().getMinerals().getListaDeMinas().get(i).getListaTunelesMinaDepositos().get(0).getDepositoEnElTunel());
+
+                    }
+
+                }
+            }
+        }
+
     }
 
 

@@ -25,6 +25,9 @@ public class MinaGrafo {
     private Tunel [][] matrizTuneles;
     private LinkedList<Tunel> listaTunelesMinaDepositos;
     private double costoMina;
+    private LinkedList<Minero> listaTotalDeMineros;
+    private int [][] matrizGrafoMapaAdyacenciaRutaMasCorta;
+    
 
     public MinaGrafo(int idMina, String mineralEnLaMina, Tunel[][] matrizTuneles) {
         this.idMina = idMina;
@@ -42,8 +45,30 @@ public class MinaGrafo {
         this.matrizTuneles = new Tunel[20][10];
         this.listaTunelesMinaDepositos=new LinkedList<>();
         this.costoMina=0;
+        this.listaTotalDeMineros=new LinkedList<>();
+        this.matrizGrafoMapaAdyacenciaRutaMasCorta=null;
     }
 
+    public int[][] getMatrizGrafoMapaAdyacenciaRutaMasCorta() {
+        return matrizGrafoMapaAdyacenciaRutaMasCorta;
+    }
+
+    public void setMatrizGrafoMapaAdyacenciaRutaMasCorta(int[][] matrizGrafoMapaAdyacenciaRutaMasCorta) {
+        this.matrizGrafoMapaAdyacenciaRutaMasCorta = matrizGrafoMapaAdyacenciaRutaMasCorta;
+    }
+    
+    
+
+    public LinkedList<Minero> getListaTotalDeMineros() {
+        return listaTotalDeMineros;
+    }
+
+    public void setListaTotalDeMineros(LinkedList<Minero> listaTotalDeMineros) {
+        this.listaTotalDeMineros = listaTotalDeMineros;
+    }
+
+    
+    
     public LinkedList<Tunel> getListaTunelesMinaDepositos() {
         return listaTunelesMinaDepositos;
     }

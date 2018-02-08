@@ -5,6 +5,7 @@
  */
 package Modelo;
 
+import java.util.LinkedList;
 import javax.swing.ImageIcon;
 
 /**
@@ -26,6 +27,11 @@ public class Minero {
     private ImageIcon imagen;//imagen del minero
     private boolean mover;//Si se puede mover o no
     private int capacidadCarga;
+    private int cargaDeMineral;//carga que lleva del mineral
+    private Deposito depositoActual;
+    private LinkedList<String> rutaDeNodosAvisitar;//ruta de los nodos visitar .. los agrego .addlast.. y los elimino y visito . getfirst
+    private NodoGrafoMina nodoA;
+    private NodoGrafoMina nodoB;
     ///Crear lista para guardar ruta del minero revisar proyecto pasado! 
     
 
@@ -44,9 +50,56 @@ public class Minero {
         this.velocidadMinero=10;
         this.cantidadDeMineralExtraido=0;
         this.capacidadCarga=capacidadCarga;
+        this.depositoActual=new Deposito(0, 0, 0, 0, 0, 0);
+        this.rutaDeNodosAvisitar=new LinkedList<>();
+        this.nodoA=new NodoGrafoMina("", 0, 0, 0, 0);
+        this.nodoB=new NodoGrafoMina("", 0, 0, 0, 0);
+        
         
     }
 
+    public int getCargaDeMineral() {
+        return cargaDeMineral;
+    }
+
+    public void setCargaDeMineral(int cargaDeMineral) {
+        this.cargaDeMineral = cargaDeMineral;
+    }
+
+    public Deposito getDepositoActual() {
+        return depositoActual;
+    }
+
+    public void setDepositoActual(Deposito depositoActual) {
+        this.depositoActual = depositoActual;
+    }
+
+    public LinkedList<String> getRutaDeNodosAvisitar() {
+        return rutaDeNodosAvisitar;
+    }
+
+    public void setRutaDeNodosAvisitar(LinkedList<String> rutaDeNodosAvisitar) {
+        this.rutaDeNodosAvisitar = rutaDeNodosAvisitar;
+    }
+
+    public NodoGrafoMina getNodoA() {
+        return nodoA;
+    }
+
+    public void setNodoA(NodoGrafoMina nodoA) {
+        this.nodoA = nodoA;
+    }
+
+    public NodoGrafoMina getNodoB() {
+        return nodoB;
+    }
+
+    public void setNodoB(NodoGrafoMina nodoB) {
+        this.nodoB = nodoB;
+    }
+
+    
+    
     public int getCapacidadCarga() {
         return capacidadCarga;
     }

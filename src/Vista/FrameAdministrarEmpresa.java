@@ -454,6 +454,16 @@ public class FrameAdministrarEmpresa extends javax.swing.JFrame {
         });
     }
 
+    public CompaniaMinera getMinerals() {
+        return minerals;
+    }
+
+    public void setMinerals(CompaniaMinera minerals) {
+        this.minerals = minerals;
+    }
+
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;

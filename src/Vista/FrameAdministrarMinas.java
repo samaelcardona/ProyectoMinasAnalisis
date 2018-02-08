@@ -5,7 +5,9 @@
  */
 package Vista;
 
+import java.util.LinkedList;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,6 +17,7 @@ public class FrameAdministrarMinas extends javax.swing.JFrame {
 
     
     FrameAdministrarEmpresa frameAdminEmpresa;
+    Thread hilo;
     /**
      * Creates new form FrameAdministrarMinas
      */
@@ -22,6 +25,9 @@ public class FrameAdministrarMinas extends javax.swing.JFrame {
         setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        this.hilo = new Thread(this.panelAnimacionMina1);
+ 
     }
 
     /**
@@ -208,6 +214,12 @@ public class FrameAdministrarMinas extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
        this.frameAdminEmpresa.setVisible(true);
+       
+        for (int i = 0; i < this.frameAdminEmpresa.getMinerals().getListaDeMinas().size(); i++) {
+             this.frameAdminEmpresa.getMinerals().getListaDeMinas().get(i).setListaDeMinerosComodinsEnMina(new LinkedList<>());
+             this.frameAdminEmpresa.getMinerals().getListaDeMinas().get(i).setListaDeMinerosEspecializadosEnMina(new LinkedList<>());
+        }
+      
         this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -217,7 +229,8 @@ public class FrameAdministrarMinas extends javax.swing.JFrame {
      //   System.out.println(this.jComboBox2.getSelectedItem()+"");
         panelAnimacionMina1.setIdMinaParaMostrar(this.jComboBox2.getSelectedItem()+"");
         
-        
+        JOptionPane.showMessageDialog(this, "Mineros especializados en Mina" +  this.frameAdminEmpresa.minerals.getListaDeMinas().get(Integer.parseInt(this.jComboBox2.getSelectedItem()+"")-1).getListaDeMinerosEspecializadosEnMina().size()+"Mineros Comodin" + this.frameAdminEmpresa.minerals.getListaDeMinas().get(Integer.parseInt(this.jComboBox2.getSelectedItem()+"")-1).getListaDeMinerosComodinsEnMina().size());
+
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -275,6 +288,15 @@ public class FrameAdministrarMinas extends javax.swing.JFrame {
         });
     }
 
+    public FrameAdministrarEmpresa getFrameAdminEmpresa() {
+        return frameAdminEmpresa;
+    }
+
+    public void setFrameAdminEmpresa(FrameAdministrarEmpresa frameAdminEmpresa) {
+        this.frameAdminEmpresa = frameAdminEmpresa;
+    }
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

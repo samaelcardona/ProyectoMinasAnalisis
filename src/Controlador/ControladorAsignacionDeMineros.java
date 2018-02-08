@@ -77,6 +77,10 @@ public class ControladorAsignacionDeMineros {
                 listaDeMinas.get(i).getListaDeMinerosEspecializadosEnMina().get(j).setxMinero((int)this.retornarXDeEntradaMina(listaDeMinas.get(i).getListaTunelesMina()));
                 listaDeMinas.get(i).getListaDeMinerosEspecializadosEnMina().get(j).setyMinero((int)this.retornarYDeEntradaMina(listaDeMinas.get(i).getListaTunelesMina()));
             }
+            for (int j = 0; j < listaDeMinas.get(i).getListaDeMinerosComodinsEnMina().size(); j++) {
+                listaDeMinas.get(i).getListaDeMinerosComodinsEnMina().get(j).setxMinero((int)this.retornarXDeEntradaMina(listaDeMinas.get(i).getListaTunelesMina()));
+                listaDeMinas.get(i).getListaDeMinerosComodinsEnMina().get(j).setyMinero((int)this.retornarYDeEntradaMina(listaDeMinas.get(i).getListaTunelesMina()));
+            }
             
         }
 
@@ -129,7 +133,7 @@ public class ControladorAsignacionDeMineros {
                 int x = listaMinasOro.size() - 1;
                 int contadorMinerosAsignados = 1;
                 for (int j = 0; j < listaMinerosOro.size(); j++) {
-                    listaMinasOro.get(x).getListaDeMinerosEspecializadosEnMina().add(listaMinerosOro.get(i));
+                    listaMinasOro.get(x).getListaDeMinerosEspecializadosEnMina().add(listaMinerosOro.get(j));
 
                     if (contadorMinerosAsignados == listaMinasOro.get(x).getListaTunelesMinaDepositos().size()) {
                         x--;
@@ -207,7 +211,7 @@ public class ControladorAsignacionDeMineros {
                 int x = listaMinasPlata.size() - 1;
                 int contadorMinerosAsignados = 1;
                 for (int j = 0; j < listaMinerosPlata.size(); j++) {
-                    listaMinasPlata.get(x).getListaDeMinerosEspecializadosEnMina().add(listaMinerosPlata.get(i));
+                    listaMinasPlata.get(x).getListaDeMinerosEspecializadosEnMina().add(listaMinerosPlata.get(j));
 
                     if (contadorMinerosAsignados == listaMinasPlata.get(x).getListaTunelesMinaDepositos().size()) {
                         x--;
@@ -284,7 +288,7 @@ public class ControladorAsignacionDeMineros {
                 int x = listaMinasBronce.size() - 1;
                 int contadorMinerosAsignados = 1;
                 for (int j = 0; j < listaMinerosBronce.size(); j++) {
-                    listaMinasBronce.get(x).getListaDeMinerosEspecializadosEnMina().add(listaMinerosBronce.get(i));
+                    listaMinasBronce.get(x).getListaDeMinerosEspecializadosEnMina().add(listaMinerosBronce.get(j));
 
                     if (contadorMinerosAsignados == listaMinasBronce.get(x).getListaTunelesMinaDepositos().size()) {
                         x--;
@@ -379,8 +383,8 @@ public class ControladorAsignacionDeMineros {
         if (i < listaMinerosComodin.size()) {
             this.ordenarListaMinas();
 
-            for (int j = listaDeMinas.size(); j > 0; j--) {
-                while (i < listaDeMineros.size() && ((listaDeMinas.get(j).getListaDeMinerosEspecializadosEnMina().size() + listaDeMinas.get(j).getListaDeMinerosComodinsEnMina().size()) < listaDeMinas.get(j).getCantidadDeMinerosMax())) {
+            for (int j = listaDeMinas.size()-1; j >= 0; j--) {
+                while (i < listaMinerosComodin.size() && ((listaDeMinas.get(j).getListaDeMinerosEspecializadosEnMina().size() + listaDeMinas.get(j).getListaDeMinerosComodinsEnMina().size()) < listaDeMinas.get(j).getCantidadDeMinerosMax())) {
                     listaDeMinas.get(j).getListaDeMinerosComodinsEnMina().add(listaMinerosComodin.get(i));
                     i++;
                 }
